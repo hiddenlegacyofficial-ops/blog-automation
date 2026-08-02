@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" width="100%" height="100%">
+  <rect width="900" height="440" rx="16" fill="#0b0f19" stroke="rgba(255,255,255,0.12)" stroke-width="2" />
+  
+  <text x="40" y="45" fill="#ffffff" font-family="system-ui, sans-serif" font-size="20" font-weight="700">RAG Answer Factual Accuracy &amp; Hallucination Rate (25,000 Queries)</text>
+  <text x="40" y="70" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="13">Higher accuracy is better (%) | Evaluated across financial &amp; medical enterprise corpora</text>
+  
+  <!-- Row 1 -->
+  <text x="40" y="125" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Llama 3.3 70B (Domain LoRA + Hybrid Vector Search)</text>
+  <rect x="420" y="108" width="410" height="26" rx="6" fill="#ec4899" />
+  <text x="840" y="126" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">94.2%</text>
+  
+  <!-- Row 2 -->
+  <text x="40" y="185" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">DeepSeek-V3 MoE (Base + Context Compression)</text>
+  <rect x="420" y="168" width="395" height="26" rx="6" fill="#06b6d4" />
+  <text x="825" y="186" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">91.8%</text>
+
+  <!-- Row 3 -->
+  <text x="40" y="245" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Llama 3.3 70B (Base Model + Naive RAG)</text>
+  <rect x="420" y="228" width="330" height="26" rx="6" fill="#8b5cf6" />
+  <text x="760" y="246" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">82.4%</text>
+
+  <!-- Row 4 -->
+  <text x="40" y="305" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">GPT-4o (Zero-Shot Standard Context Window)</text>
+  <rect x="420" y="288" width="310" height="26" rx="6" fill="#64748b" />
+  <text x="740" y="306" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">79.1%</text>
+
+  <!-- Legend & Footer -->
+  <line x1="40" y1="360" x2="860" y2="360" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+  <circle cx="50" cy="390" r="6" fill="#ec4899" />
+  <text x="65" y="394" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">Domain-Adapted Fine-Tuned Winner</text>
+
+  <circle cx="290" cy="390" r="6" fill="#06b6d4" />
+  <text x="305" y="394" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">Best Cost-Per-Token MoE Model</text>
+
+  <text x="860" y="394" fill="#64748b" font-family="system-ui, sans-serif" font-size="12" text-anchor="end">Source: Syntexic Enterprise RAG Benchmark (August 2026)</text>
+</svg>
