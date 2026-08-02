@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" width="100%" height="100%">
+  <rect width="900" height="440" rx="16" fill="#0b0f19" stroke="rgba(255,255,255,0.12)" stroke-width="2" />
+  
+  <text x="40" y="45" fill="#ffffff" font-family="system-ui, sans-serif" font-size="20" font-weight="700">P99 Latency Comparison across 5,000 Complex Reasoning Runs</text>
+  <text x="40" y="70" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="13">Lower latency is better (seconds to complete response)</text>
+  
+  <!-- Row 1 -->
+  <text x="40" y="125" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">DeepSeek-R1 (2x H100 Self-Hosted)</text>
+  <rect x="300" y="108" width="460" height="26" rx="6" fill="#ec4899" />
+  <text x="770" y="126" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">14.1s P99</text>
+  
+  <!-- Row 2 -->
+  <text x="40" y="185" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">OpenAI o3-mini (High Effort)</text>
+  <rect x="300" y="168" width="380" height="26" rx="6" fill="#a855f7" />
+  <text x="690" y="186" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">11.6s P99</text>
+
+  <!-- Row 3 -->
+  <text x="40" y="245" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">OpenAI o3-mini (Medium Effort)</text>
+  <rect x="300" y="228" width="220" height="26" rx="6" fill="#6366f1" />
+  <text x="530" y="246" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">6.8s P99</text>
+
+  <!-- Row 4 -->
+  <text x="40" y="305" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">OpenAI o3-mini (Low Effort)</text>
+  <rect x="300" y="288" width="110" height="26" rx="6" fill="#38bdf8" />
+  <text x="420" y="306" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">3.4s P99</text>
+
+  <!-- Legend & Footer -->
+  <line x1="40" y1="360" x2="860" y2="360" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+  <circle cx="50" cy="390" r="6" fill="#38bdf8" />
+  <text x="65" y="394" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">API Managed</text>
+
+  <circle cx="170" cy="390" r="6" fill="#ec4899" />
+  <text x="185" y="394" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">Custom GPU Cluster</text>
+
+  <text x="860" y="394" fill="#64748b" font-family="system-ui, sans-serif" font-size="12" text-anchor="end">Source: Syntexic Benchmark Suite (August 2026)</text>
+</svg>
