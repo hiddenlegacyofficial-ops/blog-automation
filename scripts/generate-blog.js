@@ -117,6 +117,73 @@ export const defaultLlama33Config: QLoRAConfig = {
   loraDropout: 0.05,
   bias: "none"
 };`
+  },
+  {
+    slug: "speculative-decoding-llama-3-3-vllm-2026",
+    title: "Speculative Decoding in Production: Accelerating Llama 3.3 70B by 3.2x in 2026",
+    category: "AI",
+    readTime: "21 min read",
+    coverIcon: "🚀",
+    tags: ["AI", "Speculative Decoding", "Llama 3.3", "vLLM", "CUDA", "Inference"],
+    bannerGradient: ["#0284c7", "#0f172a", "#10b981"],
+    chartData: [
+      { name: "Draft-Target Speculative (EAGLE-2)", score: 98.2, latency: "3.2x Speedup" },
+      { name: "Medusa Multi-Head Decoding", score: 94.0, latency: "2.5x Speedup" },
+      { name: "Prompt Lookup Decoding (PLD)", score: 88.1, latency: "1.8x Speedup" },
+      { name: "Autoregressive Standard Baseline", score: 60.0, latency: "1.0x Baseline" }
+    ],
+    mermaidDiagram: `graph TD
+    Prompt["📥 User Input Prompt"] --> DraftModel["⚡ Small Draft Model (Llama-3.3-8B)"]
+    DraftModel -->|Generates K Draft Tokens| VerificationEngine["🔍 Large Target Model (Llama-3.3-70B)"]
+    VerificationEngine -->|Parallel Tree Verification| AcceptReject["🎯 Token Acceptance Matrix"]
+    AcceptReject -->|Accepted K Tokens| Output["🚀 Fast Streamed Token Output"]
+    AcceptReject -->|Rejected Token| Retarget["Fallback to Target Token"]`,
+    codeSnippet: `// Configuration for vLLM Speculative Decoding Engine
+export interface SpeculativeEngineConfig {
+  targetModel: string;
+  draftModel: string;
+  numSpeculativeTokens: number;
+  useEagleTwo: boolean;
+}
+
+export const productionSpeculativeConfig: SpeculativeEngineConfig = {
+  targetModel: "meta-llama/Llama-3.3-70B-Instruct",
+  draftModel: "meta-llama/Llama-3.3-8B-Instruct",
+  numSpeculativeTokens: 5,
+  useEagleTwo: true,
+};`
+  },
+  {
+    slug: "vector-db-benchmark-qdrant-vs-milvus-vs-pgvector-2026",
+    title: "Vector Database Performance Benchmark 2026: Qdrant vs Milvus 2.5 vs Pgvector",
+    category: "AI",
+    readTime: "24 min read",
+    coverIcon: "🔍",
+    tags: ["AI", "Vector DB", "Qdrant", "Milvus", "Pgvector", "Database", "DevOps"],
+    bannerGradient: ["#1e1b4b", "#06b6d4", "#3b82f6"],
+    chartData: [
+      { name: "Qdrant (Rust HNSW + Binary Quantization)", score: 98.9, latency: "4ms P99" },
+      { name: "Milvus 2.5 (Distributed Knowhere Engine)", score: 96.2, latency: "7ms P99" },
+      { name: "Pgvector 0.7 (HNSW Extension)", score: 82.5, latency: "18ms P99" },
+      { name: "Pinecone Enterprise Serverless", score: 89.0, latency: "28ms P99" }
+    ],
+    mermaidDiagram: `graph TD
+    QueryVector["🔍 High-Dimensional Query Vector (1536d)"] --> Quantizer["⚡ Binary / Product Quantization"]
+    Quantizer --> HNSWGraph["🕸️ HNSW Multi-Layer Graph Index"]
+    HNSWGraph --> PayloadFilter["🛡️ Scalar Metadata Filter"]
+    PayloadFilter --> CandidateSet["📊 Top-K Nearest Neighbors"]
+    CandidateSet --> Output["🚀 Verified Search Results"]`,
+    codeSnippet: `import { QdrantClient } from '@qdrant/js-client-rest';
+
+const client = new QdrantClient({ url: 'http://qdrant-cluster.internal:6333' });
+
+export async function searchWithBinaryQuantization(vector: number[]) {
+  return await client.search('enterprise_embeddings', {
+    vector,
+    limit: 10,
+    params: { quantization: { ignore: false, rescore: true } },
+  });
+}`
   }
 ];
 
