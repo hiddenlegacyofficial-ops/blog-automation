@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" width="100%" height="100%">
+  <rect width="900" height="440" rx="16" fill="#0b0f19" stroke="rgba(255,255,255,0.12)" stroke-width="2" />
+  
+  <text x="40" y="45" fill="#ffffff" font-family="system-ui, sans-serif" font-size="20" font-weight="700">MCP Transport Overhead &amp; P99 Latency (50,000 Invocations)</text>
+  <text x="40" y="70" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="13">Lower P99 latency is better (ms) | Bar length represents total execution latency</text>
+  
+  <!-- Row 1 -->
+  <text x="40" y="125" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">HTTP/2 SSE Transport with Connection Pooling</text>
+  <rect x="410" y="108" width="180" height="26" rx="6" fill="#10b981" />
+  <text x="605" y="126" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">42ms P99 (0.1% overhead)</text>
+  
+  <!-- Row 2 -->
+  <text x="40" y="185" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">WebSocket Stateful Stream Transport</text>
+  <rect x="410" y="168" width="220" height="26" rx="6" fill="#3b82f6" />
+  <text x="645" y="186" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">58ms P99 (0.4% overhead)</text>
+
+  <!-- Row 3 -->
+  <text x="40" y="245" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Stdio Process Pipe (Child Process per Run)</text>
+  <rect x="410" y="228" width="360" height="26" rx="6" fill="#f59e0b" />
+  <text x="780" y="246" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">240ms P99 (Process spawn overhead)</text>
+
+  <!-- Row 4 -->
+  <text x="40" y="305" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Unpooled REST Polling Transport</text>
+  <rect x="410" y="288" width="410" height="26" rx="6" fill="#ef4444" />
+  <text x="830" y="306" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">480ms P99 (High TLS handshake cost)</text>
+
+  <!-- Legend & Footer -->
+  <line x1="40" y1="360" x2="860" y2="360" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+  <circle cx="50" cy="390" r="6" fill="#10b981" />
+  <text x="65" y="394" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">Enterprise Production Recommended</text>
+
+  <circle cx="280" cy="390" r="6" fill="#f59e0b" />
+  <text x="295" y="394" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">CLI / Local Desktop Use Only</text>
+
+  <text x="860" y="394" fill="#64748b" font-family="system-ui, sans-serif" font-size="12" text-anchor="end">Source: Syntexic MCP Benchmark (August 2026)</text>
+</svg>
