@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" width="100%" height="100%">
+  <rect width="900" height="440" rx="16" fill="#0b0f19" stroke="rgba(255,255,255,0.12)" stroke-width="2" />
+  
+  <text x="40" y="45" fill="#ffffff" font-family="system-ui, sans-serif" font-size="20" font-weight="700">Vector Search P99 Latency &amp; Recall@10 Comparison (10M Vectors)</text>
+  <text x="40" y="70" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="13">Lower P99 latency &amp; higher recall is better | Evaluated across 1,536-dim OpenAI embeddings</text>
+  
+  <!-- Row 1 -->
+  <text x="40" y="125" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Qdrant (Rust HNSW + Binary Quantization)</text>
+  <rect x="420" y="108" width="410" height="26" rx="6" fill="#38bdf8" />
+  <text x="835" y="126" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">3.8ms P99 (98.9% Recall)</text>
+  
+  <!-- Row 2 -->
+  <text x="40" y="185" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Milvus 2.5 (Knowhere GPU Engine)</text>
+  <rect x="420" y="168" width="350" height="26" rx="6" fill="#818cf8" />
+  <text x="775" y="186" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">6.4ms P99 (97.4% Recall)</text>
+
+  <!-- Row 3 -->
+  <text x="40" y="245" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Pgvector 0.7 (PostgreSQL HNSW)</text>
+  <rect x="420" y="228" width="240" height="26" rx="6" fill="#a855f7" />
+  <text x="665" y="246" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">17.2ms P99 (91.5% Recall)</text>
+
+  <!-- Row 4 -->
+  <text x="40" y="305" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Pinecone Enterprise Serverless</text>
+  <rect x="420" y="288" width="180" height="26" rx="6" fill="#64748b" />
+  <text x="605" y="306" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">26.8ms P99 (94.2% Recall)</text>
+
+  <!-- Legend & Footer -->
+  <line x1="40" y1="360" x2="860" y2="360" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+  <circle cx="50" cy="390" r="6" fill="#38bdf8" />
+  <text x="65" y="394" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">Qdrant Rust Core</text>
+
+  <circle cx="200" cy="390" r="6" fill="#818cf8" />
+  <text x="215" y="394" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">Milvus C++/Go Distributed</text>
+
+  <circle cx="400" cy="390" r="6" fill="#a855f7" />
+  <text x="415" y="394" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">PostgreSQL Extension</text>
+
+  <text x="860" y="394" fill="#64748b" font-family="system-ui, sans-serif" font-size="12" text-anchor="end">Source: Syntexic Benchmark Suite (10M Vectors - August 2026)</text>
+</svg>

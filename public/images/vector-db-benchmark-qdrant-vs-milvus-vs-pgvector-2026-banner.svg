@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050814" />
+      <stop offset="50%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#818cf8" />
+      <stop offset="100%" stop-color="#c084fc" />
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255, 255, 255, 0.04)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <rect width="1200" height="630" fill="url(#grid)" />
+  
+  <circle cx="180" cy="140" r="190" fill="#0284c7" opacity="0.2" filter="blur(50px)" />
+  <circle cx="1020" cy="490" r="230" fill="#7c3aed" opacity="0.2" filter="blur(60px)" />
+
+  <rect x="80" y="70" width="1040" height="490" rx="24" fill="rgba(15, 23, 42, 0.8)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="2" />
+  
+  <rect x="130" y="130" width="280" height="38" rx="19" fill="rgba(14, 165, 233, 0.2)" stroke="rgba(56, 189, 248, 0.4)" stroke-width="1.5" />
+  <text x="270" y="154" fill="#7dd3fc" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" text-anchor="middle" letter-spacing="1.5">ENTERPRISE VECTOR BENCHMARK</text>
+  
+  <text x="130" y="235" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="36" font-weight="800" letter-spacing="-1">Vector DB Benchmark 2026</text>
+  <text x="130" y="285" fill="url(#accent)" font-family="system-ui, -apple-system, sans-serif" font-size="31" font-weight="800" letter-spacing="-0.5">Qdrant vs Milvus 2.5 vs Pgvector 0.7</text>
+  
+  <text x="130" y="350" fill="#94a3b8" font-family="system-ui, -apple-system, sans-serif" font-size="19" font-weight="400">10 Million Embeddings • P99 Latency Tests • Binary Quantization • TypeScript Code Blueprint</text>
+  
+  <line x1="130" y1="400" x2="1070" y2="400" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1" />
+  
+  <text x="130" y="460" fill="#e2e8f0" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600">BY SYNTEXIC AI ARCHITECTURE TEAM</text>
+  <text x="130" y="485" fill="#64748b" font-family="system-ui, -apple-system, sans-serif" font-size="14">PUBLISHED AUGUST 2026 • 24 MIN READ</text>
+  
+  <text x="1070" y="475" fill="url(#accent)" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="800" text-anchor="end">SYNTEXIC.COM</text>
+</svg>
