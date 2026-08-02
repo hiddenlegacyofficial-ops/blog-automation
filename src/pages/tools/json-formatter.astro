@@ -1,0 +1,345 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="JSON & YAML Formatter & Validator — Syntexic"
+  description="Format, validate, minify, and clean messy JSON or YAML code instantly in your browser."
+  activeNav="tools"
+>
+  <div class="tool-page-header">
+    <div class="tool-page-header-inner">
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep">/</span>
+        <a href="/tools">Tools</a>
+        <span class="sep">/</span>
+        <span class="current">JSON / YAML Formatter</span>
+      </nav>
+      <div class="tool-badge cyan">Dev Utility</div>
+      <h1 class="tool-page-title">JSON / YAML Formatter & Validator</h1>
+      <p class="tool-page-desc">Paste messy JSON or YAML text below to format, validate, and minify instantly.</p>
+    </div>
+  </div>
+
+  <div class="tool-page-container">
+    <div class="formatter-card">
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <button id="btn-format-2" class="tool-btn primary">Format (2 Spaces)</button>
+          <button id="btn-format-4" class="tool-btn">Format (4 Spaces)</button>
+          <button id="btn-minify" class="tool-btn">Minify</button>
+          <button id="btn-sample" class="tool-btn">Sample JSON</button>
+        </div>
+        <div class="toolbar-right">
+          <button id="btn-copy" class="tool-btn highlight">Copy Output</button>
+          <button id="btn-clear" class="tool-btn danger">Clear</button>
+        </div>
+      </div>
+
+      <!-- Status Indicator Bar -->
+      <div id="status-bar" class="status-bar neutral">
+        <span id="status-icon">⚙️</span>
+        <span id="status-text">Ready — Paste JSON to validate & format.</span>
+      </div>
+
+      <div class="editor-grid">
+        <div class="editor-col">
+          <label for="json-input" class="editor-label">Input JSON / YAML</label>
+          <textarea
+            id="json-input"
+            class="code-input"
+            placeholder='Paste JSON here...\nExample: {"name": "Syntexic", "tools": ["json", "word-counter"]}'
+            spellcheck="false"
+          ></textarea>
+        </div>
+
+        <div class="editor-col">
+          <label for="json-output" class="editor-label">Formatted Output</label>
+          <textarea
+            id="json-output"
+            class="code-input output"
+            placeholder="Formatted output will appear here..."
+            readonly
+            spellcheck="false"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .tool-page-header {
+    background: linear-gradient(180deg, rgba(6,182,212,0.1) 0%, transparent 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 24px 36px;
+  }
+  .tool-page-header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+  .breadcrumb a { color: var(--text-muted); }
+  .breadcrumb a:hover { color: var(--accent-cyan); }
+  .breadcrumb .sep { color: var(--text-subtle); }
+  .breadcrumb .current { color: var(--text-primary); font-weight: 500; }
+
+  .tool-badge.cyan {
+    display: inline-block;
+    background: rgba(6,182,212,0.12);
+    color: var(--accent-cyan);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+  }
+  .tool-page-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 12px;
+  }
+  .tool-page-desc {
+    font-size: 16px;
+    color: var(--text-muted);
+    max-width: 640px;
+  }
+
+  .tool-page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+  }
+
+  .formatter-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+  }
+
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .toolbar-left, .toolbar-right {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .tool-btn {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 150ms ease;
+  }
+  .tool-btn:hover {
+    border-color: var(--accent-cyan);
+    background: rgba(6,182,212,0.1);
+    color: #fff;
+  }
+  .tool-btn.primary {
+    background: var(--accent-cyan);
+    border-color: var(--accent-cyan);
+    color: #000;
+    font-weight: 600;
+  }
+  .tool-btn.highlight {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: #fff;
+  }
+  .tool-btn.danger:hover {
+    border-color: #ef4444;
+    background: rgba(239,68,68,0.15);
+    color: #f87171;
+  }
+
+  .status-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 20px;
+    transition: all 200ms ease;
+  }
+  .status-bar.neutral {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+  .status-bar.valid {
+    background: rgba(16,185,129,0.1);
+    border: 1px solid rgba(16,185,129,0.3);
+    color: #34d399;
+  }
+  .status-bar.invalid {
+    background: rgba(239,68,68,0.1);
+    border: 1px solid rgba(239,68,68,0.3);
+    color: #f87171;
+  }
+
+  .editor-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .editor-col {
+    display: flex;
+    flex-direction: column;
+  }
+  .editor-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .code-input {
+    width: 100%;
+    height: 440px;
+    background: #000;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-primary);
+    resize: vertical;
+    outline: none;
+    transition: border-color 150ms ease;
+  }
+  .code-input:focus {
+    border-color: rgba(6,182,212,0.5);
+  }
+  .code-input.output {
+    background: rgba(9,9,11,0.8);
+    color: #34d399;
+  }
+
+  @media (max-width: 800px) {
+    .editor-grid { grid-template-columns: 1fr; }
+    .code-input { height: 280px; }
+  }
+</style>
+
+<script>
+  const input = document.getElementById('json-input') as HTMLTextAreaElement | null;
+  const output = document.getElementById('json-output') as HTMLTextAreaElement | null;
+  const statusBar = document.getElementById('status-bar');
+  const statusIcon = document.getElementById('status-icon');
+  const statusText = document.getElementById('status-text');
+
+  const btnFormat2 = document.getElementById('btn-format-2');
+  const btnFormat4 = document.getElementById('btn-format-4');
+  const btnMinify = document.getElementById('btn-minify');
+  const btnSample = document.getElementById('btn-sample');
+  const btnCopy = document.getElementById('btn-copy');
+  const btnClear = document.getElementById('btn-clear');
+
+  function setStatus(type: 'neutral' | 'valid' | 'invalid', text: string, icon: string) {
+    if (!statusBar || !statusIcon || !statusText) return;
+    statusBar.className = `status-bar ${type}`;
+    statusIcon.textContent = icon;
+    statusText.textContent = text;
+  }
+
+  function formatJSON(indent: number) {
+    if (!input || !output) return;
+    const raw = input.value.trim();
+    if (!raw) {
+      output.value = '';
+      setStatus('neutral', 'Ready — Paste JSON to validate & format.', '⚙️');
+      return;
+    }
+
+    try {
+      const parsed = JSON.parse(raw);
+      output.value = JSON.stringify(parsed, null, indent);
+      const keysCount = Object.keys(parsed).length;
+      setStatus('valid', `Valid JSON — Formatted successfully (${keysCount} top-level keys).`, '✅');
+    } catch (err: any) {
+      output.value = '';
+      setStatus('invalid', `JSON Syntax Error: ${err.message}`, '❌');
+    }
+  }
+
+  function minifyJSON() {
+    if (!input || !output) return;
+    const raw = input.value.trim();
+    if (!raw) return;
+
+    try {
+      const parsed = JSON.parse(raw);
+      output.value = JSON.stringify(parsed);
+      setStatus('valid', 'Valid JSON — Minified into a single line.', '⚡');
+    } catch (err: any) {
+      output.value = '';
+      setStatus('invalid', `JSON Syntax Error: ${err.message}`, '❌');
+    }
+  }
+
+  btnFormat2?.addEventListener('click', () => formatJSON(2));
+  btnFormat4?.addEventListener('click', () => formatJSON(4));
+  btnMinify?.addEventListener('click', minifyJSON);
+
+  input?.addEventListener('input', () => formatJSON(2));
+
+  btnSample?.addEventListener('click', () => {
+    if (input) {
+      input.value = JSON.stringify({
+        site: "Syntexic",
+        domain: "syntexic.com",
+        status: "active",
+        metrics: { pageSpeed: 100, seoScore: 100 },
+        tools: ["word-counter", "json-formatter", "meta-analyzer", "base64", "contrast", "screen-size"]
+      }, null, 2);
+      formatJSON(2);
+    }
+  });
+
+  btnCopy?.addEventListener('click', () => {
+    if (output && output.value) {
+      navigator.clipboard.writeText(output.value);
+      const orig = btnCopy.textContent;
+      btnCopy.textContent = 'Copied!';
+      setTimeout(() => { btnCopy.textContent = orig; }, 2000);
+    }
+  });
+
+  btnClear?.addEventListener('click', () => {
+    if (input && output) {
+      input.value = '';
+      output.value = '';
+      setStatus('neutral', 'Ready — Paste JSON to validate & format.', '⚙️');
+    }
+  });
+</script>

@@ -1,0 +1,152 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+const posts = allPosts.sort((a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf());
+---
+
+<Layout
+  title="Articles & Insights — Syntexic"
+  description="Explore deep-dive technical articles, production case studies, and engineering breakdowns on Syntexic."
+  activeNav="blog"
+>
+  <div class="blog-header">
+    <div class="blog-header-inner">
+      <div class="blog-eyebrow">Content Library</div>
+      <h1 class="blog-title">All Articles & Deep Dives</h1>
+      <p class="blog-sub">
+        No fluff, no filler. Practical engineering insights, benchmarks, and real-world experiments.
+      </p>
+
+      <!-- Category Filter Pills -->
+      <div class="category-pills">
+        <button class="cat-btn active" data-category="all">All ({posts.length})</button>
+        <button class="cat-btn" data-category="AI">AI & ML</button>
+        <button class="cat-btn" data-category="Dev">Software Dev</button>
+        <button class="cat-btn" data-category="Tech">Tech Benchmarks</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="blog-container">
+    <div class="blog-grid" id="blogGrid">
+      {posts.map((post) => (
+        <div class="blog-card-item" data-category={post.data.category}>
+          <BlogCard
+            slug={post.id}
+            title={post.data.title}
+            excerpt={post.data.description}
+            category={post.data.category}
+            categoryPillClass={post.data.categoryPillClass}
+            readTime={post.data.readTime}
+            pubDate={post.data.pubDate}
+            author={post.data.author}
+            authorAvatar={post.data.authorAvatar}
+            authorAvatarBg={post.data.authorAvatarBg}
+            coverIcon={post.data.coverIcon}
+            coverBgClass={post.data.coverBgClass}
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .blog-header {
+    background: linear-gradient(180deg, rgba(99,102,241,0.08) 0%, transparent 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 64px 24px 48px;
+    text-align: center;
+  }
+  .blog-header-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .blog-eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-primary);
+    margin-bottom: 12px;
+  }
+  .blog-title {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+  }
+  .blog-sub {
+    font-size: 16px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+
+  .category-pills {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .cat-btn {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 8px 18px;
+    border-radius: var(--radius-pill);
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 150ms ease;
+  }
+  .cat-btn:hover,
+  .cat-btn.active {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(99,102,241,0.3);
+  }
+
+  .blog-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 24px 96px;
+  }
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  @media (max-width: 900px) {
+    .blog-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll('.cat-btn');
+  const items = document.querySelectorAll('.blog-card-item');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const cat = btn.getAttribute('data-category');
+      items.forEach(item => {
+        const itemCat = item.getAttribute('data-category');
+        if (cat === 'all' || itemCat === cat) {
+          (item as HTMLElement).style.display = 'block';
+        } else {
+          (item as HTMLElement).style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

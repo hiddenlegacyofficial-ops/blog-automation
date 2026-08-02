@@ -1,0 +1,137 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Contact Us — Syntexic AI & Developer Team"
+  description="Get in touch with the Syntexic engineering team. Reach us at hiddenlegacy.official@gmail.com for inquiries, feedback, or AI tool submissions."
+  activeNav="contact"
+>
+  <div class="contact-wrap">
+    <div class="contact-header">
+      <div class="contact-eyebrow">Get In Touch</div>
+      <h1 class="contact-title">Contact Syntexic</h1>
+      <p class="contact-sub">Have a question about our AI benchmarks, web tools, or technical articles? We'd love to hear from you.</p>
+    </div>
+
+    <div class="contact-grid">
+      <!-- Contact Info Card -->
+      <div class="info-card">
+        <h2 class="card-heading">Direct Contact</h2>
+        <p class="card-desc">For general inquiries, editorial feedback, AI research submissions, or technical issues, send us an email directly.</p>
+
+        <div class="contact-item">
+          <div class="item-icon">✉️</div>
+          <div>
+            <div class="item-label">Official Email</div>
+            <a href="mailto:hiddenlegacy.official@gmail.com" class="item-value">hiddenlegacy.official@gmail.com</a>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="item-icon">🌐</div>
+          <div>
+            <div class="item-label">Official Website</div>
+            <a href="https://syntexic.com" class="item-value">syntexic.com</a>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="item-icon">⚡</div>
+          <div>
+            <div class="item-label">Deployment Edge</div>
+            <div class="item-value text">Cloudflare Pages Global CDN</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Contact Form -->
+      <div class="form-card">
+        <h2 class="card-heading">Send a Message</h2>
+        <form class="contact-form" id="contactForm" onsubmit="event.preventDefault(); alert('Thank you! Your message has been sent to hiddenlegacy.official@gmail.com');">
+          <div class="form-group">
+            <label for="name" class="form-label">Your Name</label>
+            <input type="text" id="name" required class="form-input" placeholder="e.g. Alex Johnson" />
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">Your Email Address</label>
+            <input type="email" id="email" required class="form-input" placeholder="alex@example.com" />
+          </div>
+
+          <div class="form-group">
+            <label for="subject" class="form-label">Subject</label>
+            <input type="text" id="subject" required class="form-input" placeholder="AI Tool Inquiry / General Question" />
+          </div>
+
+          <div class="form-group">
+            <label for="message" class="form-label">Message</label>
+            <textarea id="message" required class="form-textarea" rows="4" placeholder="Write your message here..."></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .contact-wrap { max-width: 1080px; margin: 0 auto; padding: 64px 24px 96px; }
+  .contact-header { text-align: center; max-width: 680px; margin: 0 auto 56px; }
+  .contact-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-primary); margin-bottom: 12px; }
+  .contact-title { font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 700; letter-spacing: -0.03em; margin-bottom: 16px; }
+  .contact-sub { font-size: 16px; color: var(--text-muted); line-height: 1.6; }
+
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 32px; }
+
+  .info-card, .form-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 36px;
+  }
+
+  .card-heading { font-size: 1.4rem; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.02em; }
+  .card-desc { font-size: 14.5px; color: var(--text-muted); line-height: 1.6; margin-bottom: 32px; }
+
+  .contact-item { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
+  .item-icon { width: 40px; height: 40px; border-radius: var(--radius-sm); background: rgba(99,102,241,0.12); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .item-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 4px; }
+  .item-value { font-size: 15px; font-weight: 600; color: var(--accent-primary); transition: color 150ms ease; }
+  .item-value:hover { color: #fff; text-decoration: underline; }
+  .item-value.text { color: var(--text-primary); text-decoration: none; }
+
+  .contact-form { display: flex; flex-direction: column; gap: 20px; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); }
+  .form-input, .form-textarea {
+    background: #000;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color 150ms ease;
+  }
+  .form-input:focus, .form-textarea:focus { border-color: var(--accent-primary); }
+
+  .submit-btn {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: #fff;
+    border: none;
+    padding: 13px;
+    border-radius: var(--radius-pill);
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 150ms ease, box-shadow 150ms ease;
+    margin-top: 8px;
+  }
+  .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(99,102,241,0.4); }
+
+  @media (max-width: 800px) { .contact-grid { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,103 @@
+---
+export interface Props {
+  activeNav?: 'home' | 'blog' | 'tools' | 'about' | 'contact' | 'privacy' | 'terms';
+}
+
+const { activeNav = 'home' } = Astro.props;
+---
+
+<nav aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="Syntexic Home">
+      Syntexic
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="/blog" class={activeNav === 'blog' ? 'active' : ''}>Blog</a></li>
+      <li><a href="/tools" class={activeNav === 'tools' ? 'active' : ''}>Tools</a></li>
+      <li><a href="/about" class={activeNav === 'about' ? 'active' : ''}>About</a></li>
+      <li><a href="/contact" class={activeNav === 'contact' ? 'active' : ''}>Contact</a></li>
+      <li><a href="/tools" class="nav-cta">Explore Tools</a></li>
+    </ul>
+  </div>
+</nav>
+
+<style>
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    background: linear-gradient(90deg, #4f46e5, #9333ea, #0284c7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .nav-logo::before {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #4f46e5;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(79, 70, 229, 0.4);
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-links a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    transition: color 150ms ease, background 150ms ease;
+  }
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: var(--text-primary);
+    background: rgba(0, 0, 0, 0.05);
+  }
+  .nav-links .nav-cta {
+    color: #ffffff;
+    background: var(--accent-primary);
+    padding: 6px 16px;
+    border-radius: var(--radius-pill);
+    transition: opacity 150ms ease, box-shadow 150ms ease;
+  }
+  .nav-links .nav-cta:hover {
+    opacity: 0.95;
+    background: var(--accent-primary);
+    box-shadow: 0 4px 16px rgba(79, 70, 229, 0.3);
+  }
+
+  @media (max-width: 600px) {
+    .nav-links li:not(:last-child):not(:first-child) {
+      display: none;
+    }
+  }
+</style>

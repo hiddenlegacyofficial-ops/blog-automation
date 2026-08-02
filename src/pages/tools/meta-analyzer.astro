@@ -1,0 +1,339 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Meta Tag & Open Graph Analyzer — Syntexic"
+  description="Analyze meta tags, Open Graph cards, Twitter cards, and SEO title/description lengths for any webpage."
+  activeNav="tools"
+>
+  <div class="tool-page-header">
+    <div class="tool-page-header-inner">
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep">/</span>
+        <a href="/tools">Tools</a>
+        <span class="sep">/</span>
+        <span class="current">Meta Tag Analyzer</span>
+      </nav>
+      <div class="tool-badge purple">SEO Utility</div>
+      <h1 class="tool-page-title">Meta Tag & Open Graph Audit</h1>
+      <p class="tool-page-desc">Paste your HTML &lt;head&gt; code or meta tags below to audit SEO titles, descriptions, and social preview cards.</p>
+    </div>
+  </div>
+
+  <div class="tool-page-container">
+    <div class="analyzer-card">
+      <div class="input-section">
+        <div class="input-header">
+          <label for="meta-input" class="input-label">HTML Head / Meta Tags Code</label>
+          <button id="btn-sample" class="sample-btn">Load Syntexic Sample Head</button>
+        </div>
+        <textarea
+          id="meta-input"
+          class="meta-textarea"
+          placeholder="Paste HTML &lt;head&gt; code or meta tags here...&#10;Example:&#10;<title>My Website Title</title>&#10;<meta name='description' content='My website description...'>"
+        ></textarea>
+        <button id="btn-analyze" class="analyze-btn">Analyze Meta Tags</button>
+      </div>
+
+      <!-- Audit Results -->
+      <div id="results-wrap" class="results-wrap" style="display: none;">
+        <div class="score-card">
+          <div class="score-val" id="score-val">0</div>
+          <div class="score-info">
+            <div class="score-label">SEO Audit Score</div>
+            <div class="score-status" id="score-status">Calculating...</div>
+          </div>
+        </div>
+
+        <div class="audit-grid">
+          <!-- Title Check -->
+          <div class="audit-item" id="item-title">
+            <div class="audit-item-header">
+              <span class="audit-icon" id="icon-title">❓</span>
+              <span class="audit-title">Page Title Tag</span>
+              <span class="audit-badge" id="badge-title">--</span>
+            </div>
+            <div class="audit-detail" id="detail-title">No title tag detected.</div>
+          </div>
+
+          <!-- Description Check -->
+          <div class="audit-item" id="item-desc">
+            <div class="audit-item-header">
+              <span class="audit-icon" id="icon-desc">❓</span>
+              <span class="audit-title">Meta Description</span>
+              <span class="audit-badge" id="badge-desc">--</span>
+            </div>
+            <div class="audit-detail" id="detail-desc">No meta description detected.</div>
+          </div>
+
+          <!-- Open Graph Check -->
+          <div class="audit-item" id="item-og">
+            <div class="audit-item-header">
+              <span class="audit-icon" id="icon-og">❓</span>
+              <span class="audit-title">Open Graph Social Cards</span>
+              <span class="audit-badge" id="badge-og">--</span>
+            </div>
+            <div class="audit-detail" id="detail-og">No og:title or og:image detected.</div>
+          </div>
+
+          <!-- Canonical Check -->
+          <div class="audit-item" id="item-canonical">
+            <div class="audit-item-header">
+              <span class="audit-icon" id="icon-canonical">❓</span>
+              <span class="audit-title">Canonical Link Tag</span>
+              <span class="audit-badge" id="badge-canonical">--</span>
+            </div>
+            <div class="audit-detail" id="detail-canonical">No canonical URL tag detected.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .tool-page-header {
+    background: linear-gradient(180deg, rgba(168,85,247,0.1) 0%, transparent 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 24px 36px;
+  }
+  .tool-page-header-inner { max-width: 1200px; margin: 0 auto; }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
+  .breadcrumb a { color: var(--text-muted); }
+  .breadcrumb a:hover { color: #c084fc; }
+  .breadcrumb .sep { color: var(--text-subtle); }
+  .breadcrumb .current { color: var(--text-primary); font-weight: 500; }
+
+  .tool-badge.purple {
+    display: inline-block;
+    background: rgba(168,85,247,0.15);
+    color: #c084fc;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+  }
+  .tool-page-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.03em; margin-bottom: 12px; }
+  .tool-page-desc { font-size: 16px; color: var(--text-muted); max-width: 640px; }
+
+  .tool-page-container { max-width: 1200px; margin: 0 auto; padding: 48px 24px 96px; }
+
+  .analyzer-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+  }
+  .input-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .input-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); }
+  .sample-btn {
+    background: none;
+    border: none;
+    color: #c084fc;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .sample-btn:hover { text-decoration: underline; }
+
+  .meta-textarea {
+    width: 100%;
+    min-height: 180px;
+    background: #000;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--text-primary);
+    outline: none;
+    resize: vertical;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+  .meta-textarea:focus { border-color: rgba(168,85,247,0.5); }
+
+  .analyze-btn {
+    background: linear-gradient(135deg, #a855f7, #6366f1);
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    border-radius: var(--radius-pill);
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 150ms ease, box-shadow 150ms ease;
+  }
+  .analyze-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(168,85,247,0.4); }
+
+  .results-wrap { margin-top: 40px; border-top: 1px solid var(--border); padding-top: 32px; }
+  .score-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 20px 24px;
+    margin-bottom: 28px;
+  }
+  .score-val {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+    background: linear-gradient(135deg, #a855f7, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .score-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); }
+  .score-status { font-size: 1.1rem; font-weight: 600; color: var(--text-primary); margin-top: 4px; }
+
+  .audit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .audit-item {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 18px 20px;
+  }
+  .audit-item-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .audit-icon { font-size: 18px; }
+  .audit-title { font-size: 15px; font-weight: 600; flex: 1; }
+  .audit-badge { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: var(--radius-pill); background: rgba(255,255,255,0.06); }
+  .audit-detail { font-size: 13.5px; color: var(--text-muted); line-height: 1.5; }
+
+  @media (max-width: 800px) { .audit-grid { grid-template-columns: 1fr; } }
+</style>
+
+<script>
+  const input = document.getElementById('meta-input') as HTMLTextAreaElement | null;
+  const btnAnalyze = document.getElementById('btn-analyze');
+  const btnSample = document.getElementById('btn-sample');
+  const resultsWrap = document.getElementById('results-wrap');
+
+  const scoreVal = document.getElementById('score-val');
+  const scoreStatus = document.getElementById('score-status');
+
+  const iconTitle = document.getElementById('icon-title');
+  const badgeTitle = document.getElementById('badge-title');
+  const detailTitle = document.getElementById('detail-title');
+
+  const iconDesc = document.getElementById('icon-desc');
+  const badgeDesc = document.getElementById('badge-desc');
+  const detailDesc = document.getElementById('detail-desc');
+
+  const iconOg = document.getElementById('icon-og');
+  const badgeOg = document.getElementById('badge-og');
+  const detailOg = document.getElementById('detail-og');
+
+  const iconCanonical = document.getElementById('icon-canonical');
+  const badgeCanonical = document.getElementById('badge-canonical');
+  const detailCanonical = document.getElementById('detail-canonical');
+
+  function analyze() {
+    if (!input || !resultsWrap || !scoreVal || !scoreStatus) return;
+    const html = input.value;
+    if (!html.trim()) return;
+
+    resultsWrap.style.display = 'block';
+    let score = 0;
+
+    // 1. Title Audit
+    const titleMatch = html.match(/<title[^>]*>(.*?)<\/title>/i);
+    if (titleMatch && titleMatch[1].trim()) {
+      const t = titleMatch[1].trim();
+      const len = t.length;
+      if (len >= 40 && len <= 65) {
+        score += 25;
+        if (iconTitle) iconTitle.textContent = '✅';
+        if (badgeTitle) badgeTitle.textContent = `${len} chars (Optimal)`;
+        if (detailTitle) detailTitle.textContent = `"${t}" — Perfect length for search engines.`;
+      } else {
+        score += 15;
+        if (iconTitle) iconTitle.textContent = '⚠️';
+        if (badgeTitle) badgeTitle.textContent = `${len} chars`;
+        if (detailTitle) detailTitle.textContent = `"${t}" — Recommended length is 40-65 characters.`;
+      }
+    } else {
+      if (iconTitle) iconTitle.textContent = '❌';
+      if (badgeTitle) badgeTitle.textContent = 'Missing';
+      if (detailTitle) detailTitle.textContent = 'No <title> tag found. Title tag is crucial for SEO ranking.';
+    }
+
+    // 2. Meta Description Audit
+    const descMatch = html.match(/<meta[^>]*name=["']description["'][^>]*content=["'](.*?)["']/i) || html.match(/<meta[^>]*content=["'](.*?)["'][^>]*name=["']description["']/i);
+    if (descMatch && descMatch[1].trim()) {
+      const d = descMatch[1].trim();
+      const len = d.length;
+      if (len >= 120 && len <= 165) {
+        score += 25;
+        if (iconDesc) iconDesc.textContent = '✅';
+        if (badgeDesc) badgeDesc.textContent = `${len} chars (Optimal)`;
+        if (detailDesc) detailDesc.textContent = `"${d}" — Great length for Google snippets.`;
+      } else {
+        score += 15;
+        if (iconDesc) iconDesc.textContent = '⚠️';
+        if (badgeDesc) badgeDesc.textContent = `${len} chars`;
+        if (detailDesc) detailDesc.textContent = `"${d}" — Recommended length is 120-165 characters.`;
+      }
+    } else {
+      if (iconDesc) iconDesc.textContent = '❌';
+      if (badgeDesc) badgeDesc.textContent = 'Missing';
+      if (detailDesc) detailDesc.textContent = 'No meta description found. Add a description for search snippet click-throughs.';
+    }
+
+    // 3. Open Graph Audit
+    const ogTitle = html.match(/property=["']og:title["']/i);
+    const ogImage = html.match(/property=["']og:image["']/i);
+    if (ogTitle && ogImage) {
+      score += 25;
+      if (iconOg) iconOg.textContent = '✅';
+      if (badgeOg) badgeOg.textContent = 'Passed';
+      if (detailOg) detailOg.textContent = 'Both og:title and og:image detected for social sharing.';
+    } else if (ogTitle || ogImage) {
+      score += 15;
+      if (iconOg) iconOg.textContent = '⚠️';
+      if (badgeOg) badgeOg.textContent = 'Partial';
+      if (detailOg) detailOg.textContent = 'Partial Open Graph tags found. Ensure both og:title and og:image are set.';
+    } else {
+      if (iconOg) iconOg.textContent = '❌';
+      if (badgeOg) badgeOg.textContent = 'Missing';
+      if (detailOg) detailOg.textContent = 'No Open Graph tags detected for Facebook, Twitter, and LinkedIn previews.';
+    }
+
+    // 4. Canonical Link Audit
+    const canonicalMatch = html.match(/<link[^>]*rel=["']canonical["']/i);
+    if (canonicalMatch) {
+      score += 25;
+      if (iconCanonical) iconCanonical.textContent = '✅';
+      if (badgeCanonical) badgeCanonical.textContent = 'Present';
+      if (detailCanonical) detailCanonical.textContent = 'Canonical URL is configured to prevent duplicate content indexing.';
+    } else {
+      if (iconCanonical) iconCanonical.textContent = '❌';
+      if (badgeCanonical) badgeCanonical.textContent = 'Missing';
+      if (detailCanonical) detailCanonical.textContent = 'No canonical link tag found.';
+    }
+
+    scoreVal.textContent = `${score}/100`;
+    scoreStatus.textContent = score >= 80 ? 'Excellent Meta SEO Health!' : (score >= 50 ? 'Good, but needs optimization.' : 'Needs Immediate Improvement.');
+  }
+
+  btnAnalyze?.addEventListener('click', analyze);
+
+  btnSample?.addEventListener('click', () => {
+    if (input) {
+      input.value = `<title>Syntexic — Next-Gen Tech Hub: Dynamic Tools & AI Insights</title>\n<meta name="description" content="Deep-dive articles, practical developer tools, and real-world AI breakdowns for engineers who build things that matter." />\n<meta property="og:title" content="Syntexic — Tech Hub" />\n<meta property="og:image" content="https://syntexic.com/og-default.png" />\n<link rel="canonical" href="https://syntexic.com/" />`;
+      analyze();
+    }
+  });
+</script>

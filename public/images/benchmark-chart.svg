@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="chart-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+
+    <linearGradient id="bar-o3-high" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4f46e5" />
+      <stop offset="100%" stop-color="#818cf8" />
+    </linearGradient>
+
+    <linearGradient id="bar-o3-med" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+
+    <linearGradient id="bar-o3-low" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#34d399" />
+    </linearGradient>
+
+    <linearGradient id="bar-gpt4" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#d97706" />
+      <stop offset="100%" stop-color="#fbbf24" />
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="450" rx="16" fill="url(#chart-bg)" stroke="rgba(255,255,255,0.1)" stroke-width="2" />
+
+  <!-- Chart Title -->
+  <text x="40" y="50" fill="#ffffff" font-family="system-ui, sans-serif" font-size="20" font-weight="700">P99 Latency &amp; Token Cost Comparison</text>
+  <text x="40" y="75" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="13">Lower latency and cost indicate higher efficiency</text>
+
+  <!-- Y Axis Grid -->
+  <g stroke="rgba(255,255,255,0.08)" stroke-width="1">
+    <line x1="220" y1="120" x2="840" y2="120" />
+    <line x1="220" y1="180" x2="840" y2="180" />
+    <line x1="220" y1="240" x2="840" y2="240" />
+    <line x1="220" y1="300" x2="840" y2="300" />
+    <line x1="220" y1="360" x2="840" y2="360" />
+  </g>
+
+  <!-- Bars Group -->
+  <!-- 1. o3-mini High -->
+  <text x="40" y="145" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">o3-mini (High Effort)</text>
+  <rect x="220" y="128" width="560" height="28" rx="6" fill="url(#bar-o3-high)" />
+  <text x="790" y="147" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">22.6s P99</text>
+
+  <!-- 2. o3-mini Medium -->
+  <text x="40" y="205" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">o3-mini (Med Effort)</text>
+  <rect x="220" y="188" width="280" height="28" rx="6" fill="url(#bar-o3-med)" />
+  <text x="510" y="207" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">9.4s P99</text>
+
+  <!-- 3. o3-mini Low -->
+  <text x="40" y="265" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">o3-mini (Low Effort)</text>
+  <rect x="220" y="248" width="130" height="28" rx="6" fill="url(#bar-o3-low)" />
+  <text x="360" y="267" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">3.8s P99</text>
+
+  <!-- 4. GPT-4o -->
+  <text x="40" y="325" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">GPT-4o (Standard)</text>
+  <rect x="220" y="308" width="90" height="28" rx="6" fill="url(#bar-gpt4)" />
+  <text x="320" y="327" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">2.4s P99</text>
+
+  <!-- Legend -->
+  <rect x="220" y="395" width="12" height="12" rx="3" fill="#818cf8" />
+  <text x="240" y="406" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">High Reasoning</text>
+
+  <rect x="360" y="395" width="12" height="12" rx="3" fill="#38bdf8" />
+  <text x="380" y="406" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">Medium Reasoning</text>
+
+  <rect x="520" y="395" width="12" height="12" rx="3" fill="#34d399" />
+  <text x="540" y="406" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">Low Reasoning</text>
+</svg>

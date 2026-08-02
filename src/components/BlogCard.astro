@@ -1,0 +1,200 @@
+---
+export interface Props {
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  categoryPillClass?: string;
+  readTime: string;
+  pubDate: Date | string;
+  author: string;
+  authorAvatar?: string;
+  authorAvatarBg?: string;
+  coverIcon?: string;
+  coverBgClass?: string;
+}
+
+const {
+  slug,
+  title,
+  excerpt,
+  category,
+  categoryPillClass = "pill-dev",
+  readTime,
+  pubDate,
+  author,
+  authorAvatar = "SX",
+  authorAvatarBg = "blue",
+  coverIcon = "⚡",
+  coverBgClass = "post-cover-dev",
+} = Astro.props;
+
+const formattedDate = new Date(pubDate).toLocaleDateString('en-US', {
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric',
+});
+---
+
+<article class="post-card">
+  <a href={`/blog/${slug}`} class="post-card-link" aria-label={`Read article: ${title}`}>
+    <div class={`post-cover ${coverBgClass}`} aria-hidden="true">
+      <div class="post-cover-pattern"></div>
+      <span class="post-cover-icon">{coverIcon}</span>
+    </div>
+    <div class="post-body">
+      <div class="post-meta">
+        <span class={`pill ${categoryPillClass}`}>{category}</span>
+        <span class="post-read-time">{readTime}</span>
+      </div>
+      <h3 class="post-title">{title}</h3>
+      <p class="post-excerpt">{excerpt}</p>
+      <div class="post-footer">
+        <div class={`post-avatar ${authorAvatarBg}`} aria-hidden="true">{authorAvatar}</div>
+        <div>
+          <div class="post-author-name">{author}</div>
+          <time class="post-date" datetime={new Date(pubDate).toISOString()}>{formattedDate}</time>
+        </div>
+        <div class="post-footer-right">
+          <div class="post-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+</article>
+
+<style>
+  .post-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .post-card-link {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    color: inherit;
+  }
+  .post-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 0 24px rgba(99,102,241,0.2);
+    border-color: rgba(99,102,241,0.3);
+  }
+  .post-cover {
+    width: 100%;
+    aspect-ratio: 16/9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .post-cover-ai { background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); }
+  .post-cover-dev { background: linear-gradient(135deg, #0a0a2a, #1a1a4a, #0d2137); }
+  .post-cover-tech { background: linear-gradient(135deg, #0a1628, #0d2137, #091a2e); }
+  .post-cover-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.15;
+    background-image: radial-gradient(circle at 20% 20%, rgba(99,102,241,0.6) 0%, transparent 50%),
+                      radial-gradient(circle at 80% 80%, rgba(168,85,247,0.6) 0%, transparent 50%);
+  }
+  .post-cover-icon {
+    position: relative;
+    font-size: 2.5rem;
+    z-index: 1;
+  }
+  .post-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  .pill {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+  }
+  .pill-ai { background: rgba(99,102,241,0.15); color: #818cf8; }
+  .pill-dev { background: rgba(6,182,212,0.12); color: var(--accent-cyan); }
+  .pill-tech { background: rgba(168,85,247,0.15); color: #c084fc; }
+  .post-read-time { font-size: 12px; color: var(--text-muted); }
+  .post-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.4;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    transition: color 150ms ease;
+  }
+  .post-card:hover .post-title { color: #a5b4fc; }
+  .post-excerpt {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.65;
+    flex: 1;
+    margin-bottom: 16px;
+  }
+  .post-footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    margin-top: auto;
+  }
+  .post-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .post-avatar.blue { background: rgba(99,102,241,0.2); color: #818cf8; }
+  .post-avatar.cyan { background: rgba(6,182,212,0.15); color: var(--accent-cyan); }
+  .post-avatar.purple { background: rgba(168,85,247,0.15); color: #c084fc; }
+  .post-author-name { font-size: 12.5px; font-weight: 500; color: var(--text-primary); }
+  .post-date { font-size: 11.5px; color: var(--text-muted); }
+  .post-footer-right { margin-left: auto; }
+  .post-arrow {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 150ms ease, background 150ms ease;
+    color: var(--text-muted);
+  }
+  .post-card:hover .post-arrow {
+    border-color: rgba(99,102,241,0.5);
+    background: rgba(99,102,241,0.1);
+    color: var(--accent-primary);
+  }
+  .post-arrow svg { width: 13px; height: 13px; }
+</style>

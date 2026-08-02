@@ -1,0 +1,232 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Screen Size & Viewport Checker — Syntexic"
+  description="Check your current screen resolution, viewport width/height, device pixel ratio (DPR), and CSS responsive breakpoints in real time."
+  activeNav="tools"
+>
+  <div class="tool-page-header">
+    <div class="tool-page-header-inner">
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep">/</span>
+        <a href="/tools">Tools</a>
+        <span class="sep">/</span>
+        <span class="current">Screen Size Checker</span>
+      </nav>
+      <div class="tool-badge red">Web Utility</div>
+      <h1 class="tool-page-title">Screen Size & Viewport Auditor</h1>
+      <p class="tool-page-desc">See your live browser window dimensions, pixel ratio, and active CSS responsive breakpoints.</p>
+    </div>
+  </div>
+
+  <div class="tool-page-container">
+    <div class="screen-card">
+      <!-- Main Metric Box -->
+      <div class="main-dim-box">
+        <div class="dim-val" id="viewport-dim">0 × 0</div>
+        <div class="dim-label">Current Viewport Size (Width × Height in pixels)</div>
+      </div>
+
+      <!-- Detail Grid -->
+      <div class="details-grid">
+        <div class="detail-stat">
+          <div class="stat-label">Active Breakpoint</div>
+          <div class="stat-val red" id="active-breakpoint">--</div>
+        </div>
+
+        <div class="detail-stat">
+          <div class="stat-label">Device Pixel Ratio (DPR)</div>
+          <div class="stat-val" id="dpr-val">1x</div>
+        </div>
+
+        <div class="detail-stat">
+          <div class="stat-label">Screen Resolution</div>
+          <div class="stat-val" id="screen-resolution">0 × 0</div>
+        </div>
+
+        <div class="detail-stat">
+          <div class="stat-label">Orientation</div>
+          <div class="stat-val" id="orientation-val">Landscape</div>
+        </div>
+
+        <div class="detail-stat">
+          <div class="stat-label">Color Depth</div>
+          <div class="stat-val" id="color-depth">24-bit</div>
+        </div>
+
+        <div class="detail-stat">
+          <div class="stat-label">Touch Screen</div>
+          <div class="stat-val" id="touch-support">No</div>
+        </div>
+      </div>
+
+      <!-- Responsive Breakpoint Reference Chart -->
+      <div class="bp-chart-section">
+        <h3 class="chart-title">CSS Breakpoint Reference Guide</h3>
+        <div class="bp-grid">
+          <div class="bp-item" id="bp-xs">
+            <span class="bp-name">xs (&lt; 640px)</span>
+            <span class="bp-device">Mobile Phones</span>
+          </div>
+          <div class="bp-item" id="bp-sm">
+            <span class="bp-name">sm (≥ 640px)</span>
+            <span class="bp-device">Large Phones</span>
+          </div>
+          <div class="bp-item" id="bp-md">
+            <span class="bp-name">md (≥ 768px)</span>
+            <span class="bp-device">Tablets & iPads</span>
+          </div>
+          <div class="bp-item" id="bp-lg">
+            <span class="bp-name">lg (≥ 1024px)</span>
+            <span class="bp-device">Laptops & Desktops</span>
+          </div>
+          <div class="bp-item" id="bp-xl">
+            <span class="bp-name">xl (≥ 1280px)</span>
+            <span class="bp-device">Large Monitors</span>
+          </div>
+          <div class="bp-item" id="bp-2xl">
+            <span class="bp-name">2xl (≥ 1536px)</span>
+            <span class="bp-device">Ultra-Wide Displays</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .tool-page-header {
+    background: linear-gradient(180deg, rgba(239,68,68,0.1) 0%, transparent 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 24px 36px;
+  }
+  .tool-page-header-inner { max-width: 1200px; margin: 0 auto; }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
+  .breadcrumb a { color: var(--text-muted); }
+  .breadcrumb a:hover { color: #f87171; }
+  .breadcrumb .sep { color: var(--text-subtle); }
+  .breadcrumb .current { color: var(--text-primary); font-weight: 500; }
+
+  .tool-badge.red {
+    display: inline-block;
+    background: rgba(239,68,68,0.12);
+    color: #f87171;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+  }
+  .tool-page-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.03em; margin-bottom: 12px; }
+  .tool-page-desc { font-size: 16px; color: var(--text-muted); max-width: 640px; }
+
+  .tool-page-container { max-width: 1200px; margin: 0 auto; padding: 48px 24px 96px; }
+
+  .screen-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+  }
+
+  .main-dim-box {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 36px 24px;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .dim-val {
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1;
+    background: linear-gradient(135deg, #f87171, #fbbf24);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .dim-label { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-top: 12px; }
+
+  .details-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 40px; }
+  .detail-stat {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 20px;
+  }
+  .stat-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 8px; }
+  .stat-val { font-size: 1.4rem; font-weight: 700; color: var(--text-primary); }
+  .stat-val.red { color: #f87171; }
+
+  .bp-chart-section { border-top: 1px solid var(--border); padding-top: 32px; }
+  .chart-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 20px; }
+  .bp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .bp-item {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: all 150ms ease;
+  }
+  .bp-item.active {
+    background: rgba(239,68,68,0.15);
+    border-color: rgba(239,68,68,0.5);
+  }
+  .bp-name { font-size: 14px; font-weight: 700; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; }
+  .bp-device { font-size: 12px; color: var(--text-muted); }
+
+  @media (max-width: 900px) { .details-grid, .bp-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .details-grid, .bp-grid { grid-template-columns: 1fr; } }
+</style>
+
+<script>
+  const viewportDim = document.getElementById('viewport-dim');
+  const activeBp = document.getElementById('active-breakpoint');
+  const dprVal = document.getElementById('dpr-val');
+  const screenRes = document.getElementById('screen-resolution');
+  const orientationVal = document.getElementById('orientation-val');
+  const colorDepth = document.getElementById('color-depth');
+  const touchSupport = document.getElementById('touch-support');
+
+  function update() {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+
+    if (viewportDim) viewportDim.textContent = `${w} × ${h}`;
+    if (dprVal) dprVal.textContent = `${window.devicePixelRatio || 1}x`;
+    if (screenRes) screenRes.textContent = `${screen.width} × ${screen.height}`;
+    if (orientationVal) orientationVal.textContent = w >= h ? 'Landscape' : 'Portrait';
+    if (colorDepth) colorDepth.textContent = `${screen.colorDepth}-bit`;
+    if (touchSupport) touchSupport.textContent = ('ontouchstart' in window || navigator.maxTouchPoints > 0) ? 'Yes (Touch Capable)' : 'No (Mouse/Keyboard)';
+
+    let bp = 'xs';
+    if (w >= 1536) bp = '2xl';
+    else if (w >= 1280) bp = 'xl';
+    else if (w >= 1024) bp = 'lg';
+    else if (w >= 768) bp = 'md';
+    else if (w >= 640) bp = 'sm';
+
+    if (activeBp) activeBp.textContent = bp;
+
+    // Highlight active breakpoint box
+    ['xs', 'sm', 'md', 'lg', 'xl', '2xl'].forEach(b => {
+      const el = document.getElementById(`bp-${b}`);
+      if (el) {
+        if (b === bp) el.classList.add('active');
+        else el.classList.remove('active');
+      }
+    });
+  }
+
+  window.addEventListener('resize', update);
+  update();
+</script>

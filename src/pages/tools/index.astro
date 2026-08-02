@@ -1,0 +1,133 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import WordCounter from '../../components/WordCounter.astro';
+---
+
+<Layout
+  title="Developer & Content Tools — Syntexic"
+  description="Free, fast, client-side web tools for engineers, writers, and digital builders. Zero server latency."
+  activeNav="tools"
+>
+  <div class="tools-header">
+    <div class="tools-header-inner">
+      <div class="tools-eyebrow">Syntexic Utility Suite</div>
+      <h1 class="tools-title">Free Utilities for Builders</h1>
+      <p class="tools-sub">
+        Client-side tools built for speed. No tracking, no data storage, 100% private and instant.
+      </p>
+    </div>
+  </div>
+
+  <div class="tools-container">
+    <!-- Featured Live Tool -->
+    <WordCounter />
+
+    <div class="section-title-wrap">
+      <h2 class="section-title">All Web Tools</h2>
+    </div>
+
+    <div class="tools-grid">
+      <a href="/tools/word-counter" class="tool-preview-card" aria-label="Word & Character Counter tool">
+        <div class="tool-preview-icon" style="background:rgba(99,102,241,0.12);" aria-hidden="true">📝</div>
+        <div class="tool-preview-info">
+          <div class="tool-preview-name">Word & Character Counter</div>
+          <div class="tool-preview-desc">Real-time word, character, sentence count plus reading time and density score.</div>
+          <span class="tool-cat-badge cat-text">Text</span>
+        </div>
+      </a>
+
+      <a href="/tools/json-formatter" class="tool-preview-card" aria-label="JSON & YAML Formatter tool">
+        <div class="tool-preview-icon" style="background:rgba(6,182,212,0.1);" aria-hidden="true">🧩</div>
+        <div class="tool-preview-info">
+          <div class="tool-preview-name">JSON / YAML Formatter</div>
+          <div class="tool-preview-desc">Paste messy JSON or YAML and get it back clean, validated, and tree-viewable.</div>
+          <span class="tool-cat-badge cat-dev">Dev</span>
+        </div>
+      </a>
+
+      <a href="/tools/meta-analyzer" class="tool-preview-card" aria-label="Meta Tag Analyzer tool">
+        <div class="tool-preview-icon" style="background:rgba(168,85,247,0.12);" aria-hidden="true">🔍</div>
+        <div class="tool-preview-info">
+          <div class="tool-preview-name">Meta Tag Analyzer</div>
+          <div class="tool-preview-desc">Enter any URL and get a full audit of Open Graph, Twitter Cards, and SEO tags.</div>
+          <span class="tool-cat-badge cat-seo">SEO</span>
+        </div>
+      </a>
+
+      <a href="/tools/base64" class="tool-preview-card" aria-label="Base64 Encoder & Decoder tool">
+        <div class="tool-preview-icon" style="background:rgba(16,185,129,0.1);" aria-hidden="true">🔐</div>
+        <div class="tool-preview-info">
+          <div class="tool-preview-name">Base64 Encoder / Decoder</div>
+          <div class="tool-preview-desc">Encode strings and files or decode base64 back to readable text — instantly.</div>
+          <span class="tool-cat-badge cat-encode">Encode</span>
+        </div>
+      </a>
+
+      <a href="/tools/contrast" class="tool-preview-card" aria-label="Color Contrast Checker tool">
+        <div class="tool-preview-icon" style="background:rgba(245,158,11,0.1);" aria-hidden="true">🎨</div>
+        <div class="tool-preview-info">
+          <div class="tool-preview-name">Color Contrast Checker</div>
+          <div class="tool-preview-desc">Test foreground/background pairs against WCAG AA and AAA with live previews.</div>
+          <span class="tool-cat-badge cat-design">Design</span>
+        </div>
+      </a>
+
+      <a href="/tools/screen-size" class="tool-preview-card" aria-label="Screen Size & Device Checker tool">
+        <div class="tool-preview-icon" style="background:rgba(239,68,68,0.1);" aria-hidden="true">📐</div>
+        <div class="tool-preview-info">
+          <div class="tool-preview-name">Screen Size Checker</div>
+          <div class="tool-preview-desc">See your current viewport, device pixel ratio, and breakpoint in real time.</div>
+          <span class="tool-cat-badge cat-web">Web</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .tools-header {
+    background: linear-gradient(180deg, rgba(6,182,212,0.08) 0%, transparent 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 64px 24px 48px;
+    text-align: center;
+  }
+  .tools-header-inner { max-width: 800px; margin: 0 auto; }
+  .tools-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-cyan); margin-bottom: 12px; }
+  .tools-title { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; letter-spacing: -0.03em; margin-bottom: 16px; }
+  .tools-sub { font-size: 16px; color: var(--text-muted); line-height: 1.6; }
+
+  .tools-container { max-width: 1200px; margin: 0 auto; padding: 60px 24px 96px; }
+
+  .section-title-wrap { margin: 64px 0 32px; border-top: 1px solid var(--border); padding-top: 48px; }
+  .section-title { font-size: 1.8rem; font-weight: 700; letter-spacing: -0.02em; }
+
+  .tools-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .tool-preview-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 22px;
+    transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    color: inherit;
+  }
+  .tool-preview-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px rgba(99,102,241,0.15);
+    border-color: rgba(99,102,241,0.3);
+  }
+  .tool-preview-icon { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .tool-preview-name { font-size: 15px; font-weight: 600; margin-bottom: 4px; letter-spacing: -0.01em; }
+  .tool-preview-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+  .tool-cat-badge { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: var(--radius-pill); margin-top: 8px; }
+  .cat-dev { background: rgba(6,182,212,0.12); color: var(--accent-cyan); }
+  .cat-text { background: rgba(99,102,241,0.15); color: #818cf8; }
+  .cat-seo { background: rgba(168,85,247,0.15); color: #c084fc; }
+  .cat-encode { background: rgba(16,185,129,0.12); color: #34d399; }
+  .cat-design { background: rgba(245,158,11,0.12); color: #fbbf24; }
+  .cat-web { background: rgba(239,68,68,0.12); color: #f87171; }
+
+  @media (max-width: 900px) { .tools-grid { grid-template-columns: 1fr; } }
+</style>

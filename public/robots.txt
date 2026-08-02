@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# XML Sitemaps for Search Engine Crawlers (Google, Bing, Yandex, DuckDuckGo)
+Sitemap: https://syntexic.com/sitemap.xml
+Sitemap: https://syntexic.com/sitemap-index.xml
+Sitemap: https://syntexic.com/rss.xml

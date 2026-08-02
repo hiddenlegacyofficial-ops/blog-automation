@@ -1,0 +1,128 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  pubDate?: string | Date;
+  author?: string;
+  category?: string;
+  canonicalUrl?: string;
+}
+
+const {
+  title = "Syntexic — Next-Gen Tech Hub: Dynamic Tools & AI-Driven Insights",
+  description = "Deep-dive articles, practical developer tools, and real-world AI breakdowns for engineers and tech enthusiasts who build things that matter.",
+  image = "https://syntexic.com/og-default.png",
+  type = "website",
+  pubDate,
+  author = "Syntexic Team",
+  category,
+  canonicalUrl = Astro.url.href,
+} = Astro.props;
+
+const siteName = "Syntexic";
+const domain = "https://syntexic.com";
+
+// Formatted Schema JSON-LD
+const schemaWebsite = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": siteName,
+  "url": domain,
+  "description": description,
+  "publisher": {
+    "@type": "Organization",
+    "name": siteName,
+    "url": domain,
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${domain}/favicon.svg`
+    }
+  }
+};
+
+const schemaArticle = type === 'article' ? {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": title,
+  "description": description,
+  "image": image,
+  "author": {
+    "@type": "Person",
+    "name": author
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": siteName,
+    "url": domain
+  },
+  "datePublished": pubDate ? new Date(pubDate).toISOString() : new Date().toISOString(),
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": canonicalUrl
+  }
+} : null;
+---
+
+<!-- Global Metadata -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- Favicon Links for Browsers, iOS, and Android -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="alternate icon" href="/favicon.svg" />
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon.svg" />
+<link rel="mask-icon" href="/favicon.svg" color="#4f46e5" />
+<meta name="msapplication-TileColor" href="#4f46e5" />
+
+<meta name="generator" content={Astro.generator} />
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+<meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#ffffff" />
+
+<!-- Google Tag (gtag.js) Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z45RDJ6XSQ"></script>
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z45RDJ6XSQ');
+</script>
+
+<!-- Fonts Preconnect -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={image} />
+<meta property="og:site_name" content={siteName} />
+{type === 'article' && pubDate && (
+  <meta property="article:published_time" content={new Date(pubDate).toISOString()} />
+)}
+{category && <meta property="article:section" content={category} />}
+
+<!-- Twitter Card -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalUrl} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={image} />
+<meta property="twitter:site" content="@syntexic" />
+
+<!-- Structured Data (JSON-LD) for Search Engine Optimization -->
+<script type="application/ld+json" set:html={JSON.stringify(schemaWebsite)}></script>
+{schemaArticle && (
+  <script type="application/ld+json" set:html={JSON.stringify(schemaArticle)}></script>
+)}

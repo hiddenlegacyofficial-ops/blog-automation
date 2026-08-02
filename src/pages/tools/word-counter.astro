@@ -1,0 +1,201 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import WordCounter from '../../components/WordCounter.astro';
+---
+
+<Layout
+  title="Word & Character Counter Tool — Syntexic"
+  description="Free real-time word counter, character counter, sentence counter, reading time estimator, and vocabulary density analyzer."
+  activeNav="tools"
+>
+  <div class="tool-page-header">
+    <div class="tool-page-header-inner">
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep">/</span>
+        <a href="/tools">Tools</a>
+        <span class="sep">/</span>
+        <span class="current">Word Counter</span>
+      </nav>
+      <div class="tool-badge">Text Utility</div>
+      <h1 class="tool-page-title">Word & Character Counter</h1>
+      <p class="tool-page-desc">Analyze word counts, character limits, reading time, and vocabulary density in real time.</p>
+    </div>
+  </div>
+
+  <div class="tool-page-container">
+    <WordCounter />
+
+    <!-- Extra Text Manipulator Controls -->
+    <div class="text-actions-card fade-in">
+      <h3 class="actions-title">Quick Text Actions</h3>
+      <div class="actions-buttons">
+        <button id="btn-uppercase" class="action-btn">UPPERCASE</button>
+        <button id="btn-lowercase" class="action-btn">lowercase</button>
+        <button id="btn-titlecase" class="action-btn">Title Case</button>
+        <button id="btn-copy" class="action-btn highlight">Copy Text</button>
+        <button id="btn-sample" class="action-btn">Load Sample Text</button>
+        <button id="btn-clear" class="action-btn danger">Clear Text</button>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .tool-page-header {
+    background: linear-gradient(180deg, rgba(99,102,241,0.1) 0%, transparent 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 24px 36px;
+  }
+  .tool-page-header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+  .breadcrumb a { color: var(--text-muted); }
+  .breadcrumb a:hover { color: var(--accent-primary); }
+  .breadcrumb .sep { color: var(--text-subtle); }
+  .breadcrumb .current { color: var(--text-primary); font-weight: 500; }
+
+  .tool-badge {
+    display: inline-block;
+    background: rgba(99,102,241,0.15);
+    color: #818cf8;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+  }
+  .tool-page-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 12px;
+  }
+  .tool-page-desc {
+    font-size: 16px;
+    color: var(--text-muted);
+    max-width: 640px;
+  }
+
+  .tool-page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+  }
+
+  .text-actions-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 24px 32px;
+    margin-top: 32px;
+  }
+  .actions-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .actions-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .action-btn {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 150ms ease;
+  }
+  .action-btn:hover {
+    border-color: var(--accent-primary);
+    background: rgba(99,102,241,0.1);
+    color: #fff;
+  }
+  .action-btn.highlight {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: #fff;
+  }
+  .action-btn.danger:hover {
+    border-color: #ef4444;
+    background: rgba(239,68,68,0.15);
+    color: #f87171;
+  }
+</style>
+
+<script>
+  const input = document.getElementById('wc-input') as HTMLTextAreaElement | null;
+  const btnUpper = document.getElementById('btn-uppercase');
+  const btnLower = document.getElementById('btn-lowercase');
+  const btnTitle = document.getElementById('btn-titlecase');
+  const btnCopy = document.getElementById('btn-copy');
+  const btnSample = document.getElementById('btn-sample');
+  const btnClear = document.getElementById('btn-clear');
+
+  function triggerUpdate() {
+    if (input) {
+      input.dispatchEvent(new Event('input'));
+    }
+  }
+
+  btnUpper?.addEventListener('click', () => {
+    if (input) {
+      input.value = input.value.toUpperCase();
+      triggerUpdate();
+    }
+  });
+
+  btnLower?.addEventListener('click', () => {
+    if (input) {
+      input.value = input.value.toLowerCase();
+      triggerUpdate();
+    }
+  });
+
+  btnTitle?.addEventListener('click', () => {
+    if (input) {
+      input.value = input.value.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+      triggerUpdate();
+    }
+  });
+
+  btnCopy?.addEventListener('click', () => {
+    if (input) {
+      navigator.clipboard.writeText(input.value);
+      const orig = btnCopy.textContent;
+      btnCopy.textContent = 'Copied!';
+      setTimeout(() => { btnCopy.textContent = orig; }, 2000);
+    }
+  });
+
+  btnSample?.addEventListener('click', () => {
+    if (input) {
+      input.value = "Syntexic is a modern developer hub for high-performance software engineering, AI production pipelines, and developer tools. Built with Astro 5 Islands Architecture for maximum speed and zero hydration overhead.";
+      triggerUpdate();
+    }
+  });
+
+  btnClear?.addEventListener('click', () => {
+    if (input) {
+      input.value = '';
+      triggerUpdate();
+    }
+  });
+</script>

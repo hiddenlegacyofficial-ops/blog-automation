@@ -1,0 +1,98 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="About Syntexic — Engineering & AI Publication"
+  description="Learn more about Syntexic, our mission, and our hands-on engineering principles."
+  activeNav="about"
+>
+  <div class="about-wrap">
+    <div class="about-eyebrow">About Syntexic</div>
+    <h1 class="about-title">Built for Engineers Who Ship</h1>
+    <p class="about-lead">
+      Syntexic is an independent technical publication and utility suite dedicated to real-world software engineering, AI production patterns, and developer productivity tools.
+    </p>
+
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="card-icon">⚡</div>
+        <h2 class="card-title">Zero Fluff Writing</h2>
+        <p class="card-desc">No filler intros or repetitive SEO fluff. We publish hands-on experiments, production metrics, and honest trade-offs.</p>
+      </div>
+
+      <div class="about-card">
+        <div class="card-icon">🛠️</div>
+        <h2 class="card-title">Client-Side Utilities</h2>
+        <p class="card-desc">Our tools run 100% in your browser. Fast, responsive, private, and free to use forever.</p>
+      </div>
+
+      <div class="about-card">
+        <div class="card-icon">🚀</div>
+        <h2 class="card-title">Lightning Fast Infrastructure</h2>
+        <p class="card-desc">Built using Astro 5 Islands Architecture and deployed globally via Cloudflare Pages for sub-50ms latency.</p>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .about-wrap {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 80px 24px 96px;
+    text-align: center;
+  }
+  .about-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-primary);
+    margin-bottom: 12px;
+  }
+  .about-title {
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+  }
+  .about-lead {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 680px;
+    margin: 0 auto 64px;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    text-align: left;
+  }
+  .about-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 32px 24px;
+  }
+  .card-icon {
+    font-size: 2rem;
+    margin-bottom: 16px;
+  }
+  .card-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .card-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; }
+  }
+</style>

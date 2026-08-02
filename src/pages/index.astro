@@ -1,11 +1,693 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import WordCounter from '../components/WordCounter.astro';
+import BlogCard from '../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const allPosts = await getCollection('blog');
+const posts = allPosts.sort((a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()).slice(0, 3);
+
+// JSON-LD Schema for FAQPage SEO
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Syntexic and how does it empower AI and software developers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Syntexic is an all-in-one Artificial Intelligence (AI) hub, technical publication, and client-side developer utility platform. It provides engineers, researchers, and builders with real-world AI benchmarks, production workflows, and zero-latency web tools to optimize code, analyze text, and inspect web performance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are the online AI utilities and web tools on Syntexic free to use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, 100% of the tools hosted on Syntexic — including our Word Counter, JSON/YAML Formatter, Base64 Converter, Meta Tag Analyzer, Color Contrast Checker, and Screen Size Auditor — are free to use without registration or hidden fees."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Syntexic store or record any text or data processed inside web tools?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. All utility tools on Syntexic execute entirely inside your local web browser (client-side execution). Your data, code snippets, tokens, and input texts are never transmitted to external servers or logged in databases."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does Syntexic benchmark AI models like o3-mini and chain-of-thought LLMs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We evaluate AI reasoning models using hands-on production workloads, measuring P99 latency, cost per 1M tokens, reasoning accuracy, and multi-file code generation reliability across cloud providers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How frequently are new AI articles, tools, and benchmarks published on Syntexic?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We publish updated AI benchmarks, technical deep dives, and developer utilities on a weekly automated schedule, ensuring you have access to the latest insights in generative AI and modern web engineering."
+      }
+    }
+  ]
+};
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+  title="Syntexic — Premier AI Hub, Developer Tools & Machine Learning Benchmarks"
+  description="Syntexic is the ultimate AI hub for software engineers. Access real-time AI benchmarks, client-side developer tools, machine learning insights, and production frameworks."
+  activeNav="home"
+>
+  <!-- Inject FAQPage Schema into Head -->
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)}></script>
+
+  <!-- ── HERO ── -->
+  <header class="hero">
+    <div class="hero-eyebrow" role="text">
+      <span class="hero-eyebrow-dot" aria-hidden="true"></span>
+      Syntexic — Artificial Intelligence (AI) & Dev Platform
+    </div>
+
+    <h1 class="hero-headline">
+      Artificial Intelligence &<br />
+      <span class="gradient-text">Dev Tools That Actually Ship.</span>
+    </h1>
+
+    <p class="hero-sub">
+      Deep-dive <strong>AI research</strong>, practical client-side developer utilities, and real-world machine learning benchmarks — 
+      for engineers who build high-performance software.
+    </p>
+
+    <div class="hero-search-wrap" role="search">
+      <label for="hero-search" class="sr-only">Search AI articles and tools</label>
+      <span class="hero-search-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+      </span>
+      <input class="hero-search" id="hero-search" type="search" placeholder="Search AI models, dev tools, benchmarks…" autocomplete="off" />
+      <span class="hero-search-shortcut" aria-hidden="true">⌘ K</span>
+    </div>
+
+    <div class="hero-ctas">
+      <a href="/blog" class="btn btn-primary" role="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        Explore AI Articles
+      </a>
+      <a href="/tools" class="btn btn-ghost" role="button">
+        View AI & Dev Tools
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- ── MINI TOOL WIDGET ── -->
+  <WordCounter />
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ── BLOG SECTION ── -->
+  <section class="blog-section fade-in" aria-label="Latest AI articles">
+    <div class="section-header">
+      <div>
+        <div class="section-label">AI & Engineering Insights</div>
+        <h2 class="section-title">Latest AI Articles & Benchmarks</h2>
+      </div>
+      <a href="/blog" class="section-link" aria-label="View all AI articles">
+        View all articles
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="blog-grid">
+      {posts.map((post) => (
+        <BlogCard
+          slug={post.id}
+          title={post.data.title}
+          excerpt={post.data.description}
+          category={post.data.category}
+          categoryPillClass={post.data.categoryPillClass}
+          readTime={post.data.readTime}
+          pubDate={post.data.pubDate}
+          author={post.data.author}
+          authorAvatar={post.data.authorAvatar}
+          authorAvatarBg={post.data.authorAvatarBg}
+          coverIcon={post.data.coverIcon}
+          coverBgClass={post.data.coverBgClass}
+        />
+      ))}
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ── TOOLS HUB PREVIEW ── -->
+  <section class="tools-section fade-in" aria-label="Developer and AI tools">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Syntexic Utility Suite</div>
+        <h2 class="section-title">Developer & AI Web Utilities</h2>
+      </div>
+      <a href="/tools" class="section-link" aria-label="View all web tools">
+        All tools
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="tools-grid">
+      <a href="/tools/word-counter" class="tool-preview-card" aria-label="Word & Character Counter tool">
+        <div class="tool-preview-icon" style="background:rgba(99,102,241,0.12);" aria-hidden="true">📝</div>
+        <div class="tool-preview-info">
+          <div class="tool-preview-name">Word & Character Counter</div>
+          <div class="tool-preview-desc">Real-time word, character, sentence count plus reading time and density score.</div>
+          <span class="tool-cat-badge cat-text">Text</span>
+        </div>
+      </a>
+
+      <a href="/tools/json-formatter" class="tool-preview-card" aria-label="JSON & YAML Formatter tool">
+        <div class="tool-preview-icon" style="background:rgba(6,182,212,0.1);" aria-hidden="true">🧩</div>
+        <div class="tool-preview-info">
+          <div class="tool-preview-name">JSON / YAML Formatter</div>
+          <div class="tool-preview-desc">Paste messy JSON or YAML and get it back clean, validated, and tree-viewable.</div>
+          <span class="tool-cat-badge cat-dev">Dev</span>
+        </div>
+      </a>
+
+      <a href="/tools/meta-analyzer" class="tool-preview-card" aria-label="Meta Tag Analyzer tool">
+        <div class="tool-preview-icon" style="background:rgba(168,85,247,0.12);" aria-hidden="true">🔍</div>
+        <div class="tool-preview-info">
+          <div class="tool-preview-name">Meta Tag Analyzer</div>
+          <div class="tool-preview-desc">Enter any URL and get a full audit of Open Graph, Twitter Cards, and SEO tags.</div>
+          <span class="tool-cat-badge cat-seo">SEO</span>
+        </div>
+      </a>
+
+      <a href="/tools/base64" class="tool-preview-card" aria-label="Base64 Encoder & Decoder tool">
+        <div class="tool-preview-icon" style="background:rgba(16,185,129,0.1);" aria-hidden="true">🔐</div>
+        <div class="tool-preview-info">
+          <div class="tool-preview-name">Base64 Encoder / Decoder</div>
+          <div class="tool-preview-desc">Encode strings and files or decode base64 back to readable text — instantly.</div>
+          <span class="tool-cat-badge cat-encode">Encode</span>
+        </div>
+      </a>
+
+      <a href="/tools/contrast" class="tool-preview-card" aria-label="Color Contrast Checker tool">
+        <div class="tool-preview-icon" style="background:rgba(245,158,11,0.1);" aria-hidden="true">🎨</div>
+        <div class="tool-preview-info">
+          <div class="tool-preview-name">Color Contrast Checker</div>
+          <div class="tool-preview-desc">Test foreground/background pairs against WCAG AA and AAA with live previews.</div>
+          <span class="tool-cat-badge cat-design">Design</span>
+        </div>
+      </a>
+
+      <a href="/tools/screen-size" class="tool-preview-card" aria-label="Screen Size & Device Checker tool">
+        <div class="tool-preview-icon" style="background:rgba(239,68,68,0.1);" aria-hidden="true">📐</div>
+        <div class="tool-preview-info">
+          <div class="tool-preview-name">Screen Size Checker</div>
+          <div class="tool-preview-desc">See your current viewport, device pixel ratio, and breakpoint in real time.</div>
+          <span class="tool-cat-badge cat-web">Web</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ── 600-WORD ON-PAGE SEO CONTENT SECTION ── -->
+  <section class="seo-content-section fade-in" aria-label="About Syntexic AI and Web Tools">
+    <div class="seo-content-container">
+      <div class="section-label">Empowering Modern Engineering</div>
+      <h2 class="seo-heading">Democratizing Artificial Intelligence (AI) and Developer Tools</h2>
+
+      <div class="seo-text-body">
+        <p>
+          <strong>Artificial Intelligence (AI)</strong> is rapidly revolutionizing how modern software engineers, product designers, and content strategists build applications. In an era dominated by large language models (LLMs), chain-of-thought reasoning systems, and autonomous coding agents, having instant access to reliable developer tools and empirical AI benchmarks is critical. Syntexic was engineered from the ground up to serve as the ultimate platform for high-performance software engineering insights, generative AI breakdowns, and zero-latency web utilities.
+        </p>
+
+        <h3>The Convergence of Generative AI and Developer Workflows</h3>
+        <p>
+          As AI models transition from simple pattern recognition to advanced multi-step reasoning engines, integrating AI into production environments introduces new technical challenges. Developers must balance inference latency, token expenditure, API rate limits, and output reliability. At Syntexic, our mission is to cut through marketing hype by providing real-world benchmarks, architectural case studies, and actionable operational guidance. Whether evaluating o3-mini reasoning effort or configuring edge deployments on Cloudflare Workers, our articles provide the precise data needed to make informed tech stack choices.
+        </p>
+
+        <h3>High-Performance Client-Side Web Utilities</h3>
+        <p>
+          Beyond technical publishing, Syntexic offers a suite of interactive, browser-native web tools designed for maximum efficiency and total data privacy. Traditional online tools often suffer from slow server roundtrips, intrusive advertisements, and privacy concerns regarding user data logging. Syntexic solves this by running 100% of tool execution client-side inside your browser:
+        </p>
+
+        <ul>
+          <li><strong>Word & Character Counter</strong>: Analyze draft lengths, sentence structures, reading time estimates, and unique vocabulary density scores in real time without transmitting text to external servers.</li>
+          <li><strong>JSON & YAML Formatter & Validator</strong>: Clean, format, and minify complex JSON or YAML structures with instant line-by-line syntax error identification.</li>
+          <li><strong>Meta Tag & Open Graph Audit Tool</strong>: Inspect webpage &lt;title&gt; tags, meta descriptions, Open Graph preview cards, and canonical links to maximize organic search engine visibility.</li>
+          <li><strong>Base64 Encoder & Decoder</strong>: Perform instant two-way conversions between raw text strings and Base64 encoding.</li>
+          <li><strong>Color Contrast Checker (WCAG 2.1)</strong>: Validate text and background color pairs against WCAG AA and AAA accessibility standards for inclusive web design.</li>
+          <li><strong>Screen Size & Viewport Auditor</strong>: Inspect live window dimensions, Device Pixel Ratio (DPR), color depth, and active CSS breakpoints across responsive layouts.</li>
+        </ul>
+
+        <h3>Built for Speed, SEO, and Scale</h3>
+        <p>
+          Syntexic is constructed using the latest Astro 5 Islands Architecture. By shipping zero JavaScript by default and rendering static Multi-Page Application (MPA) routes, Syntexic achieves a 100/100 Google Core Web Vitals performance rating. Combined with automated XML sitemaps, RSS 2.0 feeds, structured JSON-LD schema markup, and global edge delivery via Cloudflare Pages, Syntexic ensures search engine bots can index new AI articles and developer tools instantly. Explore our tools and insights today to elevate your AI development stack.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ── SEO FAQ SECTION WITH INTERACTIVE ACCORDION ── -->
+  <section class="faq-section fade-in" aria-label="Frequently Asked Questions">
+    <div class="faq-container">
+      <div class="section-label">Got Questions?</div>
+      <h2 class="faq-heading">Frequently Asked Questions</h2>
+      <p class="faq-sub">Learn more about Syntexic, our AI research standards, and privacy guarantees.</p>
+
+      <div class="faq-accordion">
+        <details class="faq-item" open>
+          <summary class="faq-question">
+            <span>What is Syntexic and how does it help developers with AI?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+          </summary>
+          <div class="faq-answer">
+            <p>Syntexic is an all-in-one Artificial Intelligence (AI) hub, technical publication, and client-side developer utility platform. It provides engineers, researchers, and builders with real-world AI benchmarks, production workflows, and zero-latency web tools to optimize code, analyze text, and inspect web performance.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>Are the online AI and developer tools on Syntexic free to use?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+          </summary>
+          <div class="faq-answer">
+            <p>Yes, 100% of the tools hosted on Syntexic — including our Word Counter, JSON/YAML Formatter, Base64 Converter, Meta Tag Analyzer, Color Contrast Checker, and Screen Size Auditor — are free to use without registration or hidden fees.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>Does Syntexic store or record any text or data processed inside web tools?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+          </summary>
+          <div class="faq-answer">
+            <p>No. All utility tools on Syntexic execute entirely inside your local web browser (client-side execution). Your data, code snippets, tokens, and input texts are never transmitted to external servers or logged in databases.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>How does Syntexic analyze AI models and benchmark performance?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+          </summary>
+          <div class="faq-answer">
+            <p>We evaluate AI reasoning models using hands-on production workloads, measuring P99 latency, cost per 1M tokens, reasoning accuracy, and multi-file code generation reliability across cloud providers.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>How often are new AI articles, tools, and benchmarks published?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+          </summary>
+          <div class="faq-answer">
+            <p>We publish updated AI benchmarks, technical deep dives, and developer utilities on a weekly automated schedule, ensuring you have access to the latest insights in generative AI and modern web engineering.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
 </Layout>
+
+<style>
+  /* ── HERO ── */
+  .hero {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 24px 72px;
+    text-align: center;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(99,102,241,0.12);
+    border: 1px solid rgba(99,102,241,0.3);
+    color: #818cf8;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 28px;
+    letter-spacing: 0.02em;
+  }
+  .hero-eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent-primary);
+    border-radius: 50%;
+    animation: pulse 2s ease infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero-headline {
+    font-size: clamp(2.8rem, 7vw, 5.2rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.08;
+    margin-bottom: 24px;
+  }
+  .hero-headline .gradient-text {
+    background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #06b6d4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--text-muted);
+    max-width: 580px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+    font-weight: 400;
+  }
+
+  .hero-search-wrap {
+    position: relative;
+    max-width: 640px;
+    margin: 0 auto 32px;
+  }
+  .hero-search-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+  }
+  .hero-search-icon svg { width: 18px; height: 18px; display: block; }
+  .hero-search {
+    width: 100%;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    padding: 16px 20px 16px 50px;
+    font-size: 16px;
+    font-family: 'Outfit', sans-serif;
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color 200ms ease, box-shadow 200ms ease;
+  }
+  .hero-search::placeholder { color: var(--text-subtle); }
+  .hero-search:focus {
+    border-color: rgba(99,102,241,0.5);
+    box-shadow: 0 0 0 3px rgba(99,102,241,0.15), 0 0 32px rgba(99,102,241,0.12);
+  }
+  .hero-search-shortcut {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 3px 8px;
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+    pointer-events: none;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    border-radius: var(--radius-pill);
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    cursor: pointer;
+    transition: transform 150ms ease, opacity 150ms ease, box-shadow 150ms ease;
+    border: none;
+    outline: none;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn:active { transform: translateY(0); }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: #fff;
+  }
+  .btn-primary:hover { box-shadow: 0 8px 24px rgba(99,102,241,0.4); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border-hover);
+  }
+  .btn-ghost:hover { border-color: rgba(99,102,241,0.5); background: rgba(99,102,241,0.06); }
+  .btn svg { width: 16px; height: 16px; }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 32px;
+  }
+  .section-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-primary);
+    margin-bottom: 6px;
+  }
+  .section-title {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+  }
+  .section-link {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 150ms ease;
+    white-space: nowrap;
+    padding-bottom: 4px;
+  }
+  .section-link:hover { color: var(--accent-primary); }
+  .section-link svg { width: 14px; height: 14px; transition: transform 150ms ease; }
+  .section-link:hover svg { transform: translateX(3px); }
+
+  /* ── DIVIDER ── */
+  .divider {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ── BLOG SECTION ── */
+  .blog-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 72px 24px 80px;
+  }
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  /* ── TOOLS PREVIEW ── */
+  .tools-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .tool-preview-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 22px;
+    transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    color: inherit;
+  }
+  .tool-preview-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px rgba(99,102,241,0.15);
+    border-color: rgba(99,102,241,0.3);
+  }
+  .tool-preview-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .tool-preview-name { font-size: 15px; font-weight: 600; margin-bottom: 4px; letter-spacing: -0.01em; }
+  .tool-preview-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+  .tool-cat-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: var(--radius-pill);
+    margin-top: 8px;
+  }
+  .cat-dev { background: rgba(6,182,212,0.12); color: var(--accent-cyan); }
+  .cat-text { background: rgba(99,102,241,0.15); color: #818cf8; }
+  .cat-seo { background: rgba(168,85,247,0.15); color: #c084fc; }
+  .cat-encode { background: rgba(16,185,129,0.12); color: #34d399; }
+  .cat-design { background: rgba(245,158,11,0.12); color: #fbbf24; }
+  .cat-web { background: rgba(239,68,68,0.12); color: #f87171; }
+
+  /* ── 600-WORD SEO CONTENT SECTION ── */
+  .seo-content-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 24px;
+  }
+  .seo-content-container {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 48px;
+  }
+  .seo-heading {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+    color: var(--text-primary);
+  }
+  .seo-text-body {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: #d4d4d8;
+  }
+  .seo-text-body h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 36px 0 14px;
+    letter-spacing: -0.02em;
+  }
+  .seo-text-body p {
+    margin-bottom: 20px;
+  }
+  .seo-text-body ul {
+    margin: 0 0 24px 24px;
+  }
+  .seo-text-body li {
+    margin-bottom: 10px;
+  }
+
+  /* ── FAQ ACCORDION SECTION ── */
+  .faq-section {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 80px 24px 96px;
+  }
+  .faq-container {
+    text-align: center;
+  }
+  .faq-heading {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 12px;
+  }
+  .faq-sub {
+    font-size: 16px;
+    color: var(--text-muted);
+    margin-bottom: 48px;
+  }
+  .faq-accordion {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .faq-item {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: border-color 150ms ease;
+  }
+  .faq-item[open] {
+    border-color: rgba(99,102,241,0.4);
+  }
+  .faq-question {
+    padding: 20px 24px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    user-select: none;
+  }
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+  .faq-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--text-muted);
+    transition: transform 200ms ease;
+    flex-shrink: 0;
+  }
+  .faq-item[open] .faq-icon {
+    transform: rotate(180deg);
+    color: var(--accent-primary);
+  }
+  .faq-answer {
+    padding: 0 24px 24px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-muted);
+    border-top: 1px solid rgba(255,255,255,0.04);
+    margin-top: 4px;
+    padding-top: 16px;
+  }
+
+  @media (max-width: 900px) {
+    .blog-grid, .tools-grid { grid-template-columns: 1fr; }
+    .seo-content-container { padding: 32px 24px; }
+  }
+  @media (max-width: 600px) {
+    .hero { padding: 64px 16px 56px; }
+  }
+</style>

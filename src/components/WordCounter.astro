@@ -1,0 +1,290 @@
+---
+---
+
+<section class="tool-section fade-in" aria-label="Word counter tool">
+  <div class="tool-card">
+    <div class="tool-card-inner">
+      <div class="tool-left">
+        <div class="tool-badge" role="text">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Live Syntexic Tool
+        </div>
+        <h2 class="tool-title">Word & Character Counter</h2>
+        <p class="tool-desc">Paste any text below for an instant word, character, sentence, and reading-time breakdown.</p>
+        <textarea
+          class="tool-textarea"
+          id="wc-input"
+          placeholder="Paste your text or blog draft here to analyze length and reading metrics…"
+          aria-label="Text input for word counter"
+          rows="5"
+        ></textarea>
+      </div>
+
+      <div class="tool-right" aria-live="polite" aria-label="Word count statistics">
+        <div class="tool-stats-grid">
+          <div class="tool-stat">
+            <div class="tool-stat-label">Words</div>
+            <div class="tool-stat-value" id="wc-words">0</div>
+          </div>
+          <div class="tool-stat">
+            <div class="tool-stat-label">Characters</div>
+            <div class="tool-stat-value cyan" id="wc-chars">0</div>
+          </div>
+          <div class="tool-stat">
+            <div class="tool-stat-label">Sentences</div>
+            <div class="tool-stat-value" id="wc-sentences">0</div>
+          </div>
+          <div class="tool-stat">
+            <div class="tool-stat-label">Paragraphs</div>
+            <div class="tool-stat-value cyan" id="wc-paras">0</div>
+          </div>
+        </div>
+
+        <div class="tool-reading-time" role="group" aria-label="Estimated reading time">
+          <div class="tool-reading-time-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="tool-reading-time-text">Estimated reading time</div>
+            <div class="tool-reading-time-val" id="wc-read">0 min read</div>
+          </div>
+        </div>
+
+        <div class="density-bar" role="group" aria-label="Vocabulary density">
+          <div class="density-bar-label">Vocabulary density</div>
+          <div class="density-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Unique word ratio">
+            <div class="density-fill" id="wc-density"></div>
+          </div>
+          <div class="density-nums">
+            <span id="wc-unique">0 unique words</span>
+            <span id="wc-ratio">0%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tool-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+  .tool-card {
+    background: var(--bg-surface);
+    border: 1px solid rgba(99,102,241,0.3);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    box-shadow: 0 0 40px rgba(99,102,241,0.08), inset 0 1px 0 rgba(255,255,255,0.04);
+    position: relative;
+    overflow: hidden;
+  }
+  .tool-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(99,102,241,0.6), rgba(168,85,247,0.6), transparent);
+  }
+  .tool-card-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  .tool-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(6,182,212,0.1);
+    border: 1px solid rgba(6,182,212,0.3);
+    color: var(--accent-cyan);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 14px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .tool-title { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 8px; }
+  .tool-desc { color: var(--text-muted); font-size: 15px; margin-bottom: 20px; line-height: 1.6; }
+  .tool-textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    font-size: 14px;
+    font-family: 'Outfit', sans-serif;
+    color: var(--text-primary);
+    resize: vertical;
+    min-height: 140px;
+    outline: none;
+    transition: border-color 200ms ease, box-shadow 200ms ease;
+    line-height: 1.6;
+  }
+  .tool-textarea::placeholder { color: var(--text-subtle); }
+  .tool-textarea:focus {
+    border-color: rgba(99,102,241,0.5);
+    box-shadow: 0 0 0 3px rgba(99,102,241,0.12);
+  }
+
+  .tool-right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .tool-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .tool-stat {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    transition: border-color 200ms ease;
+  }
+  .tool-stat:hover { border-color: var(--border-hover); }
+  .tool-stat-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .tool-stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .tool-stat-value.cyan {
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-primary));
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+  .tool-reading-time {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .tool-reading-time-icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(99,102,241,0.15);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .tool-reading-time-icon svg { width: 18px; height: 18px; color: var(--accent-primary); }
+  .tool-reading-time-text { font-size: 14px; color: var(--text-muted); }
+  .tool-reading-time-val { font-weight: 700; color: var(--text-primary); font-size: 15px; }
+
+  .density-bar {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+  }
+  .density-bar-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .density-track {
+    width: 100%;
+    height: 6px;
+    background: rgba(255,255,255,0.06);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+  }
+  .density-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    border-radius: var(--radius-pill);
+    width: 0%;
+    transition: width 300ms ease;
+  }
+  .density-nums {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--text-subtle);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  @media (max-width: 900px) {
+    .tool-card-inner { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  const input = document.getElementById('wc-input') as HTMLTextAreaElement | null;
+  const elWords = document.getElementById('wc-words');
+  const elChars = document.getElementById('wc-chars');
+  const elSentences = document.getElementById('wc-sentences');
+  const elParas = document.getElementById('wc-paras');
+  const elRead = document.getElementById('wc-read');
+  const elDensity = document.getElementById('wc-density');
+  const elUnique = document.getElementById('wc-unique');
+  const elRatio = document.getElementById('wc-ratio');
+
+  function countWords(text: string) {
+    const trimmed = text.trim();
+    if (!trimmed) return [];
+    return trimmed.split(/\s+/).filter(Boolean);
+  }
+
+  function countSentences(text: string) {
+    const trimmed = text.trim();
+    if (!trimmed) return 0;
+    const matches = trimmed.match(/[^.!?]*[.!?]+/g);
+    return matches ? matches.length : (trimmed.length > 0 ? 1 : 0);
+  }
+
+  function update() {
+    if (!input || !elWords || !elChars || !elSentences || !elParas || !elRead || !elDensity || !elUnique || !elRatio) return;
+    const text = input.value;
+    const words = countWords(text);
+    const wordCount = words.length;
+    const charCount = text.length;
+    const sentences = countSentences(text);
+    const paras = text.trim() ? text.trim().split(/\n\s*\n/).filter(p => p.trim()).length : 0;
+    const readMins = Math.max(1, Math.ceil(wordCount / 200));
+    const uniqueWords = new Set(words.map(w => w.toLowerCase().replace(/[^a-z0-9]/g, ''))).size;
+    const ratio = wordCount > 0 ? Math.round((uniqueWords / wordCount) * 100) : 0;
+
+    elWords.textContent = wordCount.toLocaleString();
+    elChars.textContent = charCount.toLocaleString();
+    elSentences.textContent = sentences.toLocaleString();
+    elParas.textContent = paras.toLocaleString();
+    elRead.textContent = wordCount === 0 ? '0 min read' : readMins + ' min read';
+    elDensity.style.width = ratio + '%';
+    elDensity.parentElement?.setAttribute('aria-valuenow', ratio.toString());
+    elUnique.textContent = uniqueWords.toLocaleString() + ' unique words';
+    elRatio.textContent = ratio + '%';
+  }
+
+  if (input) {
+    input.addEventListener('input', update);
+  }
+</script>

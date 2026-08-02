@@ -1,0 +1,53 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Privacy Policy — Syntexic AI & Dev Hub"
+  description="Privacy Policy for Syntexic. Learn how we prioritize user privacy with client-side execution, zero data selling, and transparent analytics."
+  activeNav="privacy"
+>
+  <div class="legal-wrap">
+    <div class="legal-header">
+      <div class="legal-eyebrow">Legal</div>
+      <h1 class="legal-title">Privacy Policy</h1>
+      <p class="legal-updated">Last Updated: August 2, 2026</p>
+    </div>
+
+    <div class="legal-body">
+      <h2>1. Introduction</h2>
+      <p>At Syntexic (accessible from syntexic.com and syntexic.pages.dev), accessible from our platform, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Syntexic and how we use it.</p>
+
+      <h2>2. Client-Side Tool Processing & Data Privacy</h2>
+      <p>All developer and AI utility tools hosted on Syntexic (including our Word Counter, JSON Formatter, Base64 Encoder/Decoder, Meta Tag Analyzer, Color Contrast Checker, and Screen Size Auditor) run <strong>100% client-side inside your web browser</strong>.</p>
+      <ul>
+        <li>No text, code, JSON payloads, or uploaded credentials entered into our web tools are ever sent to, processed by, or stored on remote servers.</li>
+        <li>Your data remains private to your device at all times.</li>
+      </ul>
+
+      <h2>3. Log Files & Analytics</h2>
+      <p>Syntexic follows a standard procedure of using log files provided by our edge CDN partner, Cloudflare. These logs include internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks. These are not linked to any information that is personally identifiable. The purpose of the information is for analyzing trends, administering the site, tracking users' movement on the website, and gathering demographic information.</p>
+
+      <h2>4. Cookies & Web Beacons</h2>
+      <p>Syntexic does not use intrusive tracking cookies or personal profiling cookies. Local storage may be utilized strictly to preserve your user interface preferences (such as dark mode theme state).</p>
+
+      <h2>5. Contact Information</h2>
+      <p>If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us at <a href="mailto:hiddenlegacy.official@gmail.com" class="email-link">hiddenlegacy.official@gmail.com</a>.</p>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .legal-wrap { max-width: 800px; margin: 0 auto; padding: 64px 24px 96px; }
+  .legal-header { border-bottom: 1px solid var(--border); padding-bottom: 32px; margin-bottom: 40px; }
+  .legal-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-primary); margin-bottom: 12px; }
+  .legal-title { font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 700; letter-spacing: -0.03em; margin-bottom: 12px; }
+  .legal-updated { font-size: 14px; color: var(--text-muted); }
+
+  .legal-body { font-size: 1.05rem; line-height: 1.8; color: #d4d4d8; }
+  .legal-body h2 { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin: 40px 0 16px; letter-spacing: -0.02em; }
+  .legal-body p { margin-bottom: 20px; }
+  .legal-body ul { margin: 0 0 24px 24px; }
+  .legal-body li { margin-bottom: 8px; }
+  .email-link { color: var(--accent-primary); font-weight: 600; text-decoration: underline; }
+</style>

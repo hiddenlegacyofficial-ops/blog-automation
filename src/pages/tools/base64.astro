@@ -1,0 +1,216 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Base64 Encoder & Decoder Tool — Syntexic"
+  description="Encode text strings to Base64 format or decode Base64 back to plain text instantly in your browser."
+  activeNav="tools"
+>
+  <div class="tool-page-header">
+    <div class="tool-page-header-inner">
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep">/</span>
+        <a href="/tools">Tools</a>
+        <span class="sep">/</span>
+        <span class="current">Base64 Encoder / Decoder</span>
+      </nav>
+      <div class="tool-badge green">Encoding Utility</div>
+      <h1 class="tool-page-title">Base64 Encoder & Decoder</h1>
+      <p class="tool-page-desc">Convert plain text into Base64 format or decode Base64 back into readable text.</p>
+    </div>
+  </div>
+
+  <div class="tool-page-container">
+    <div class="base64-card">
+      <div class="mode-tabs">
+        <button id="tab-encode" class="mode-tab active">Encode Text → Base64</button>
+        <button id="tab-decode" class="mode-tab">Decode Base64 → Text</button>
+      </div>
+
+      <div class="editor-grid">
+        <div class="editor-col">
+          <label for="b64-input" class="editor-label" id="input-label">Plain Text Input</label>
+          <textarea
+            id="b64-input"
+            class="b64-textarea"
+            placeholder="Type or paste plain text here..."
+          ></textarea>
+        </div>
+
+        <div class="editor-col">
+          <div class="output-label-row">
+            <label for="b64-output" class="editor-label" id="output-label">Base64 Result</label>
+            <button id="btn-copy" class="copy-btn">Copy Result</button>
+          </div>
+          <textarea
+            id="b64-output"
+            class="b64-textarea output"
+            placeholder="Base64 encoded output will appear here..."
+            readonly
+          ></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .tool-page-header {
+    background: linear-gradient(180deg, rgba(16,185,129,0.1) 0%, transparent 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 24px 36px;
+  }
+  .tool-page-header-inner { max-width: 1200px; margin: 0 auto; }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
+  .breadcrumb a { color: var(--text-muted); }
+  .breadcrumb a:hover { color: #34d399; }
+  .breadcrumb .sep { color: var(--text-subtle); }
+  .breadcrumb .current { color: var(--text-primary); font-weight: 500; }
+
+  .tool-badge.green {
+    display: inline-block;
+    background: rgba(16,185,129,0.12);
+    color: #34d399;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+  }
+  .tool-page-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.03em; margin-bottom: 12px; }
+  .tool-page-desc { font-size: 16px; color: var(--text-muted); max-width: 640px; }
+
+  .tool-page-container { max-width: 1200px; margin: 0 auto; padding: 48px 24px 96px; }
+
+  .base64-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+  }
+
+  .mode-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+  }
+  .mode-tab {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 10px 20px;
+    border-radius: var(--radius-pill);
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 150ms ease;
+  }
+  .mode-tab.active {
+    background: #10b981;
+    border-color: #10b981;
+    color: #000;
+    font-weight: 600;
+  }
+
+  .editor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .editor-col { display: flex; flex-direction: column; }
+  .output-label-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .editor-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); }
+  .copy-btn {
+    background: rgba(16,185,129,0.15);
+    border: 1px solid rgba(16,185,129,0.3);
+    color: #34d399;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+  .copy-btn:hover { background: rgba(16,185,129,0.25); }
+
+  .b64-textarea {
+    width: 100%;
+    height: 320px;
+    background: #000;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--text-primary);
+    outline: none;
+    resize: vertical;
+    line-height: 1.6;
+  }
+  .b64-textarea:focus { border-color: rgba(16,185,129,0.5); }
+  .b64-textarea.output { background: rgba(9,9,11,0.8); color: #34d399; }
+
+  @media (max-width: 800px) { .editor-grid { grid-template-columns: 1fr; } .b64-textarea { height: 200px; } }
+</style>
+
+<script>
+  const input = document.getElementById('b64-input') as HTMLTextAreaElement | null;
+  const output = document.getElementById('b64-output') as HTMLTextAreaElement | null;
+  const tabEncode = document.getElementById('tab-encode');
+  const tabDecode = document.getElementById('tab-decode');
+  const inputLabel = document.getElementById('input-label');
+  const outputLabel = document.getElementById('output-label');
+  const btnCopy = document.getElementById('btn-copy');
+
+  let mode: 'encode' | 'decode' = 'encode';
+
+  function process() {
+    if (!input || !output) return;
+    const text = input.value;
+    if (!text) {
+      output.value = '';
+      return;
+    }
+
+    try {
+      if (mode === 'encode') {
+        output.value = btoa(unescape(encodeURIComponent(text)));
+      } else {
+        output.value = decodeURIComponent(escape(atob(text.trim())));
+      }
+    } catch (e) {
+      output.value = '[Invalid Base64 Input String]';
+    }
+  }
+
+  tabEncode?.addEventListener('click', () => {
+    mode = 'encode';
+    tabEncode.classList.add('active');
+    tabDecode?.classList.remove('active');
+    if (inputLabel) inputLabel.textContent = 'Plain Text Input';
+    if (outputLabel) outputLabel.textContent = 'Base64 Result';
+    process();
+  });
+
+  tabDecode?.addEventListener('click', () => {
+    mode = 'decode';
+    tabDecode.classList.add('active');
+    tabEncode?.classList.remove('active');
+    if (inputLabel) inputLabel.textContent = 'Base64 Input';
+    if (outputLabel) outputLabel.textContent = 'Decoded Text Result';
+    process();
+  });
+
+  input?.addEventListener('input', process);
+
+  btnCopy?.addEventListener('click', () => {
+    if (output && output.value) {
+      navigator.clipboard.writeText(output.value);
+      const orig = btnCopy.textContent;
+      btnCopy.textContent = 'Copied!';
+      setTimeout(() => { btnCopy.textContent = orig; }, 2000);
+    }
+  });
+</script>
