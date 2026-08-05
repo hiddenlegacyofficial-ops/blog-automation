@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" width="100%" height="100%">
+  <rect width="900" height="440" rx="16" fill="#0b0f19" stroke="rgba(255,255,255,0.12)" stroke-width="2" />
+  
+  <text x="40" y="45" fill="#ffffff" font-family="system-ui, sans-serif" font-size="20" font-weight="700">Global Agent State Query Latency &amp; Connection Overhead (100k Queries)</text>
+  <text x="40" y="70" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="13">Lower is better | Roundtrip query time from 300+ global edge locations (ms)</text>
+  
+  <!-- Row 1 -->
+  <text x="40" y="125" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Cloudflare D1 Edge Read Replicas (SQLite WORM Engine)</text>
+  <rect x="450" y="108" width="60" height="26" rx="6" fill="#10b981" />
+  <text x="520" y="126" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">1.8ms Edge Read</text>
+  
+  <!-- Row 2 -->
+  <text x="40" y="185" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Cloudflare Hyperdrive + Regional PostgreSQL (Neon/Supabase)</text>
+  <rect x="450" y="168" width="140" height="26" rx="6" fill="#f97316" />
+  <text x="600" y="186" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">14.5ms Pooled Write</text>
+
+  <!-- Row 3 -->
+  <text x="40" y="245" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Direct TCP Connection to Centralized AWS RDS</text>
+  <rect x="450" y="228" width="240" height="26" rx="6" fill="#3b82f6" />
+  <text x="700" y="246" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">82.0ms TCP Handshake</text>
+
+  <!-- Row 4 -->
+  <text x="40" y="305" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Un-cached REST API Wrapper to External Relational DB</text>
+  <rect x="450" y="288" width="350" height="26" rx="6" fill="#ef4444" />
+  <text x="810" y="306" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">195.0ms HTTP Tax</text>
+
+  <!-- Legend & Footer -->
+  <line x1="40" y1="360" x2="860" y2="360" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+  <circle cx="50" cy="390" r="6" fill="#10b981" />
+  <text x="65" y="394" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">Cloudflare D1 Local Edge SQLite Cache</text>
+
+  <circle cx="340" cy="390" r="6" fill="#f97316" />
+  <text x="355" y="394" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">Hyperdrive TCP Pre-connection Pool</text>
+
+  <text x="860" y="394" fill="#64748b" font-family="system-ui, sans-serif" font-size="12" text-anchor="end">Source: Syntexic AI Infra Lab (August 2026)</text>
+</svg>
