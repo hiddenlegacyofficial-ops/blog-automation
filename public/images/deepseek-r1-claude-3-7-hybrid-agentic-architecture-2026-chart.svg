@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" width="100%" height="100%">
+  <rect width="900" height="440" rx="16" fill="#0b0f19" stroke="rgba(255,255,255,0.12)" stroke-width="2" />
+  
+  <text x="40" y="45" fill="#ffffff" font-family="system-ui, sans-serif" font-size="20" font-weight="700">Cost &amp; Accuracy Trade-Off Matrix in Production Swarms</text>
+  <text x="40" y="70" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="13">Higher score is better (%) | Benchmark across 25,000 multi-step coding tasks</text>
+  
+  <!-- Row 1 -->
+  <text x="40" y="125" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Hybrid Router (DeepSeek-R1 + Claude 3.7 Sonnet)</text>
+  <rect x="440" y="108" width="365" height="26" rx="6" fill="#38bdf8" />
+  <text x="815" y="126" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">96.4% ($0.42 / task)</text>
+  
+  <!-- Row 2 -->
+  <text x="40" y="185" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Pure Claude 3.7 Sonnet (Full Reasoning)</text>
+  <rect x="440" y="168" width="375" height="26" rx="6" fill="#818cf8" />
+  <text x="825" y="186" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">97.8% ($2.10 / task)</text>
+
+  <!-- Row 3 -->
+  <text x="40" y="245" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Pure DeepSeek-R1 (Self-Hosted Distilled)</text>
+  <rect x="440" y="228" width="320" height="26" rx="6" fill="#c084fc" />
+  <text x="770" y="246" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">89.5% ($0.15 / task)</text>
+
+  <!-- Row 4 -->
+  <text x="40" y="305" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Single GPT-4.5 Standard Router</text>
+  <rect x="440" y="288" width="280" height="26" rx="6" fill="#64748b" />
+  <text x="730" y="306" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">81.2% ($1.85 / task)</text>
+
+  <!-- Legend & Footer -->
+  <line x1="40" y1="360" x2="860" y2="360" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+  <circle cx="50" cy="390" r="6" fill="#38bdf8" />
+  <text x="65" y="394" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">Optimal ROI &amp; Production Recommended</text>
+
+  <circle cx="340" cy="390" r="6" fill="#818cf8" />
+  <text x="355" y="394" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">Highest Accuracy Baseline</text>
+
+  <text x="860" y="394" fill="#64748b" font-family="system-ui, sans-serif" font-size="12" text-anchor="end">Source: Syntexic Enterprise AI Benchmarks (August 2026)</text>
+</svg>
