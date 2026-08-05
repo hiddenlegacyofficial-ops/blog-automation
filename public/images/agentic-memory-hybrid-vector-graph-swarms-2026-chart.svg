@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" width="100%" height="100%">
+  <rect width="900" height="440" rx="16" fill="#0b0f19" stroke="rgba(255,255,255,0.12)" stroke-width="2" />
+  
+  <text x="40" y="45" fill="#ffffff" font-family="system-ui, sans-serif" font-size="20" font-weight="700">Multi-Turn Agent Retrieval Accuracy &amp; Context Precision (%)</text>
+  <text x="40" y="70" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="13">Higher accuracy is better (%) | Benchmarked across 10,000 multi-agent long-horizon workflows</text>
+  
+  <!-- Row 1 -->
+  <text x="40" y="125" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Hybrid Vector-Graph Memory + Temporal Decay (2026 Architecture)</text>
+  <rect x="440" y="108" width="375" height="26" rx="6" fill="#8b5cf6" />
+  <text x="825" y="126" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">97.6% (12ms)</text>
+  
+  <!-- Row 2 -->
+  <text x="40" y="185" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">GraphRAG Entity Knowledge Graph (Static Index)</text>
+  <rect x="440" y="168" width="320" height="26" rx="6" fill="#ec4899" />
+  <text x="770" y="186" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">89.4% (45ms)</text>
+
+  <!-- Row 3 -->
+  <text x="40" y="245" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Pure Vector Similarity Search (Dense HNSW)</text>
+  <rect x="440" y="228" width="280" height="26" rx="6" fill="#06b6d4" />
+  <text x="730" y="246" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">74.2% (18ms)</text>
+
+  <!-- Row 4 -->
+  <text x="40" y="305" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Naive Full Context Window Stuffed (In-Context Prompting)</text>
+  <rect x="440" y="288" width="180" height="26" rx="6" fill="#64748b" />
+  <text x="630" y="306" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">58.1% (1,450ms)</text>
+
+  <!-- Legend & Footer -->
+  <line x1="40" y1="360" x2="860" y2="360" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+  <circle cx="50" cy="390" r="6" fill="#8b5cf6" />
+  <text x="65" y="394" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">Production Hybrid Memory Benchmark Winner</text>
+
+  <text x="860" y="394" fill="#64748b" font-family="system-ui, sans-serif" font-size="12" text-anchor="end">Source: Syntexic AI Swarm Benchmark (August 2026)</text>
+</svg>
