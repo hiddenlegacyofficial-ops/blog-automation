@@ -140,10 +140,10 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString('en-US', {
   }
   .article-lead {
     font-size: 1.25rem;
-    color: #a1a1aa;
+    color: #334155;
     line-height: 1.6;
     margin-bottom: 32px;
-    font-weight: 400;
+    font-weight: 500;
   }
 
   .article-author {
@@ -181,44 +181,58 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString('en-US', {
 
   /* Markdown Content Styling */
   .article-body {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #d4d4d8;
+    font-size: 1.125rem;
+    line-height: 1.85;
+    color: #1e293b;
+    font-weight: 400;
   }
   .article-body :global(h2) {
     font-size: 1.8rem;
     font-weight: 700;
     letter-spacing: -0.02em;
     margin: 48px 0 20px;
-    color: var(--text-primary);
+    color: #0f172a;
   }
   .article-body :global(h3) {
     font-size: 1.4rem;
     font-weight: 600;
     margin: 36px 0 16px;
-    color: var(--text-primary);
+    color: #0f172a;
   }
   .article-body :global(p) {
     margin-bottom: 24px;
+    color: #1e293b;
+  }
+  .article-body :global(strong) {
+    color: #0f172a;
+    font-weight: 700;
+  }
+  .article-body :global(a) {
+    color: var(--accent-primary);
+    font-weight: 600;
+    text-decoration: underline;
   }
   .article-body :global(ul),
   .article-body :global(ol) {
     margin: 0 0 24px 24px;
+    color: #1e293b;
   }
   .article-body :global(li) {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    color: #1e293b;
   }
   .article-body :global(blockquote) {
-    border-left: 3px solid var(--accent-primary);
-    background: rgba(99,102,241,0.08);
+    border-left: 4px solid var(--accent-primary);
+    background: #f8fafc;
     padding: 16px 24px;
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
     margin: 32px 0;
     font-style: italic;
-    color: #e4e4e7;
+    color: #1e293b;
+    font-weight: 500;
   }
   .article-body :global(pre) {
-    background: #09090b !important;
+    background: #0f172a !important;
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     padding: 20px;
@@ -226,6 +240,7 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString('en-US', {
     margin: 32px 0;
     font-family: 'JetBrains Mono', monospace;
     font-size: 14px;
+    color: #f8fafc;
   }
   .article-body :global(table) {
     width: 100%;
@@ -234,14 +249,15 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString('en-US', {
   }
   .article-body :global(th),
   .article-body :global(td) {
-    border: 1px solid var(--border);
+    border: 1px solid #cbd5e1;
     padding: 12px 16px;
     text-align: left;
+    color: #1e293b;
   }
   .article-body :global(th) {
-    background: rgba(255,255,255,0.04);
-    color: var(--text-primary);
-    font-weight: 600;
+    background: #f1f5f9;
+    color: #0f172a;
+    font-weight: 700;
   }
 
   .article-footer-nav {
