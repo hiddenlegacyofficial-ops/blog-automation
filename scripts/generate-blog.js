@@ -273,26 +273,114 @@ function generatePost() {
   let selectedTopic = TOPICS_BANK.find(t => !existingSlugs.has(t.slug));
 
   if (!selectedTopic) {
+    const dynamicTopics = [
+      {
+        slugPrefix: "deepseek-r1-vs-claude-3-7-reasoning-benchmark",
+        title: "DeepSeek-R1 vs Claude 3.7 Sonnet: Reasoning Effort & Coding Benchmark (2026)",
+        category: "AI",
+        coverIcon: "🧠",
+        tags: ["AI", "DeepSeek", "Claude 3.7", "Reasoning Models", "Python", "DevOps"],
+        chartData: [
+          { name: "DeepSeek-R1 Full (Chain-of-Thought)", score: 98.2, latency: "Pass@1 92.8%" },
+          { name: "Claude 3.7 Sonnet Extended Thinking", score: 99.4, latency: "Pass@1 95.1%" },
+          { name: "OpenAI o3-mini (High Effort)", score: 97.5, latency: "Pass@1 91.4%" },
+          { name: "Llama 3.3 70B Instruct Base", score: 84.0, latency: "Pass@1 78.0%" }
+        ],
+        mermaidDiagram: `graph TD
+    Query["📥 Complex Mathematical / Algorithmic Prompt"] --> ReasoningEngine["🧠 Chain-of-Thought Thinking Engine"]
+    ReasoningEngine --> Tokens["⚡ Dynamic Thinking Tokens Buffer"]
+    Tokens --> SelfCorrection["🛡️ Internal Verification Loop"]
+    SelfCorrection --> Output["🚀 Verified Solution Output"]`,
+        codeSnippet: `import { OpenAI } from 'openai';
+
+const client = new OpenAI({ baseURL: 'https://api.deepseek.com/v1', apiKey: process.env.DEEPSEEK_API_KEY });
+
+export async function executeReasoningTask(prompt: string) {
+  const response = await client.chat.completions.create({
+    model: 'deepseek-reasoner',
+    messages: [{ role: 'user', content: prompt }],
+  });
+  return {
+    reasoningContent: response.choices[0].message.reasoning_content,
+    finalAnswer: response.choices[0].message.content,
+  };
+}`
+      },
+      {
+        slugPrefix: "graphrag-vs-vector-search-enterprise-knowledge",
+        title: "GraphRAG vs Hybrid Vector Search: Zero-Hallucination Knowledge Graphs (2026)",
+        category: "AI",
+        coverIcon: "🌲",
+        tags: ["AI", "GraphRAG", "Knowledge Graph", "Neo4j", "Vector DB", "RAG"],
+        chartData: [
+          { name: "Microsoft GraphRAG + Neo4j Engine", score: 99.1, latency: "99.4% Accuracy" },
+          { name: "Hybrid Dense+Sparse Hybrid Vector", score: 92.4, latency: "91.0% Accuracy" },
+          { name: "Standard Dense Vector Search", score: 81.0, latency: "79.2% Accuracy" },
+          { name: "Keyword BM25 Baseline", score: 64.5, latency: "58.0% Accuracy" }
+        ],
+        mermaidDiagram: `graph TD
+    Document["📄 Unstructured Enterprise PDF / Docs"] --> EntityExtract["🧠 LLM Entity & Relationship Extractor"]
+    EntityExtract --> GraphDB["🌐 Neo4j Knowledge Graph"]
+    EntityExtract --> VectorDB["⚡ Qdrant Vector Index"]
+    GraphDB --> HybridSearch["🔍 GraphRAG Retriever Engine"]
+    VectorDB --> HybridSearch
+    HybridSearch --> Response["🚀 Grounded Context Response"]`,
+        codeSnippet: `import { QdrantClient } from '@qdrant/js-client-rest';
+
+export async function hybridGraphVectorQuery(queryVector: number[], textQuery: string) {
+  const qdrant = new QdrantClient({ url: 'http://localhost:6333' });
+  const vectorResults = await qdrant.search('enterprise_docs', { vector: queryVector, limit: 10 });
+  return vectorResults;
+}`
+      },
+      {
+        slugPrefix: "astro-5-server-islands-vs-nextjs-15-ppr",
+        title: "Astro 5 Server Islands vs Next.js 15 Partial Prerendering: Performance Benchmark (2026)",
+        category: "Web Dev",
+        coverIcon: "⚡",
+        tags: ["Web Dev", "Astro 5", "Next.js 15", "Performance", "React", "Frontend"],
+        chartData: [
+          { name: "Astro 5 Server Islands (Deferred Async)", score: 99.8, latency: "18ms TTFB" },
+          { name: "Next.js 15 PPR (Partial Prerendering)", score: 97.2, latency: "34ms TTFB" },
+          { name: "Standard React 19 SSR Monolith", score: 82.1, latency: "140ms TTFB" },
+          { name: "Client-Side SPA Hydration", score: 68.0, latency: "320ms TTFB" }
+        ],
+        mermaidDiagram: `graph TD
+    Request["🌐 Edge User HTTP Request"] --> Shell["⚡ Instant Static HTML Shell"]
+    Shell --> Island1["🏝️ Dynamic User Profile Server Island"]
+    Shell --> Island2["🏝️ Dynamic Shopping Cart Server Island"]
+    Island1 --> Render["🚀 Final Hydrated DOM Page"]
+    Island2 --> Render`,
+        codeSnippet: `---
+// Astro 5 Server Island Component
+import UserProfile from '../components/UserProfile.astro';
+---
+<html lang="en">
+  <body>
+    <h1>Static Marketing Shell</h1>
+    <UserProfile server:defer>
+      <div slot="fallback" class="skeleton-loader">Loading profile...</div>
+    </UserProfile>
+  </body>
+</html>`
+      }
+    ];
+
+    const idx = existingSlugs.size % dynamicTopics.length;
+    const template = dynamicTopics[idx];
     const timestamp = Date.now();
+    
     selectedTopic = {
-      slug: `enterprise-ai-architecture-deepdive-${timestamp}`,
-      title: `Enterprise AI Agent Architecture & Multi-Model Routing (${new Date().getFullYear()})`,
-      category: "AI",
-      readTime: "18 min read",
-      coverIcon: "⚡",
-      tags: ["AI", "Architecture", "DevOps", "LLM", "TypeScript"],
+      slug: `${template.slugPrefix}-${timestamp.toString().slice(-4)}`,
+      title: template.title,
+      category: template.category,
+      readTime: "20 min read",
+      coverIcon: template.coverIcon,
+      tags: template.tags,
       bannerGradient: ["#0b0f19", "#1e1b4b", "#38bdf8"],
-      chartData: [
-        { name: "Cloudflare Edge Router (vLLM Engine)", score: 94.8, latency: "1.2s P99" },
-        { name: "Direct API Fallback Mode", score: 88.5, latency: "2.4s P99" },
-        { name: "Un-routed Legacy Monolith", score: 62.0, latency: "5.8s P99" },
-        { name: "Basic Single Model Gateway", score: 71.4, latency: "3.9s P99" }
-      ],
-      mermaidDiagram: `graph TD
-    Client["📱 User Request"] --> Router["⚡ Edge Router"]
-    Router --> Primary["🚀 Primary Inference Node"]
-    Router --> Fallback["🛡️ High-Availability Fallback Node"]`,
-      codeSnippet: `console.log("Automated enterprise deployment pipeline verified.");`
+      chartData: template.chartData,
+      mermaidDiagram: template.mermaidDiagram,
+      codeSnippet: template.codeSnippet
     };
   }
 
