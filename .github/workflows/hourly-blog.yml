@@ -1,8 +1,8 @@
-name: Hourly Blog Generator & Auto Deploy
+name: 30-Min Blog Generator & Auto Deploy
 
 on:
   schedule:
-    - cron: '0 * * * *' # Runs every hour on the hour
+    - cron: '*/30 * * * *' # Runs every 30 minutes
   workflow_dispatch: # Allows manual trigger from GitHub Actions tab
 
 jobs:
