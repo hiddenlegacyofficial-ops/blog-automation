@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" width="100%" height="100%">
+  <rect width="900" height="440" rx="16" fill="#0b0f19" stroke="rgba(255,255,255,0.12)" stroke-width="2" />
+  
+  <text x="40" y="45" fill="#ffffff" font-family="system-ui, sans-serif" font-size="20" font-weight="700">Production Performance &amp; Execution Accuracy Matrix</text>
+  <text x="40" y="70" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="13">Higher score = better | Evaluated across real-world production workloads</text>
+  
+  
+  <!-- Row 1 -->
+  <text x="40" y="125" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">MCP Standard (JSON-RPC + Tools)</text>
+  <rect x="380" y="108" width="448" height="26" rx="6" fill="#10b981" />
+  <text x="848" y="126" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">99.5% (Sub-3ms Overhead)</text>
+
+  <!-- Row 2 -->
+  <text x="40" y="185" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">OpenAI Function Calling (REST)</text>
+  <rect x="380" y="168" width="396" height="26" rx="6" fill="#3b82f6" />
+  <text x="796" y="186" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">88% (45ms Overhead)</text>
+
+  <!-- Row 3 -->
+  <text x="40" y="245" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Custom Plugin Systems</text>
+  <rect x="380" y="228" width="324" height="26" rx="6" fill="#8b5cf6" />
+  <text x="724" y="246" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">72% (Variable)</text>
+
+  <!-- Row 4 -->
+  <text x="40" y="305" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Hardcoded Tool Wrappers</text>
+  <rect x="380" y="288" width="248" height="26" rx="6" fill="#64748b" />
+  <text x="648" y="306" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">55% (Brittle)</text>
+
+  <!-- Legend & Footer -->
+  <line x1="40" y1="360" x2="860" y2="360" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+  <circle cx="50" cy="390" r="6" fill="#10b981" />
+  <text x="65" y="394" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">Production Benchmark Winner</text>
+
+  <text x="860" y="394" fill="#64748b" font-family="system-ui, sans-serif" font-size="12" text-anchor="end">Source: Syntexic Engineering Benchmark Suite (August 2026)</text>
+</svg>
