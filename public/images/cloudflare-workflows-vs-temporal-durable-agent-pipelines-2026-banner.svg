@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070913" />
+      <stop offset="50%" stop-color="#111827" />
+      <stop offset="100%" stop-color="#030712" />
+    </linearGradient>
+    <linearGradient id="primaryGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f97316" />
+      <stop offset="50%" stop-color="#ec4899" />
+      <stop offset="100%" stop-color="#8b5cf6" />
+    </linearGradient>
+    <linearGradient id="badgeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f97316" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#ec4899" stop-opacity="0.1" />
+    </linearGradient>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M 36 0 L 0 0 0 36" fill="none" stroke="rgba(255, 255, 255, 0.035)" stroke-width="1"/>
+    </pattern>
+    <filter id="blurFilter" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="60" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)" />
+  <rect width="1200" height="630" fill="url(#grid)" />
+
+  <!-- Ambient Glow Orbs -->
+  <circle cx="180" cy="130" r="180" fill="#f97316" opacity="0.15" filter="url(#blurFilter)" />
+  <circle cx="1020" cy="480" r="220" fill="#8b5cf6" opacity="0.18" filter="url(#blurFilter)" />
+  <circle cx="600" cy="300" r="160" fill="#ec4899" opacity="0.10" filter="url(#blurFilter)" />
+
+  <!-- Main Card Container -->
+  <rect x="70" y="60" width="1060" height="510" rx="28" fill="rgba(15, 23, 42, 0.85)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="2" />
+
+  <!-- Category Badge -->
+  <rect x="120" y="110" width="340" height="38" rx="19" fill="url(#badgeGrad)" stroke="rgba(249, 115, 22, 0.45)" stroke-width="1.5" />
+  <text x="290" y="134" fill="#fb923c" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="1.8">DURABLE EXECUTION &amp; AI AGENTS 2026</text>
+
+  <!-- Title Headline -->
+  <text x="120" y="210" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="34" font-weight="800" letter-spacing="-1">Cloudflare Workflows vs Temporal: Durable AI Agents</text>
+  <text x="120" y="260" fill="url(#primaryGlow)" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="800" letter-spacing="-0.5">Resilient Multi-Step Pipelines, State Checkpointing &amp; Edge Latency</text>
+
+  <!-- Subtitle / Key Value Props -->
+  <text x="120" y="325" fill="#94a3b8" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="400">Zero-Infra Edge Orchestration • Deterministic Replay • Sub-10ms Cold Starts • Production Benchmark</text>
+
+  <!-- Feature Pills -->
+  <g transform="translate(120, 365)">
+    <rect x="0" y="0" width="180" height="34" rx="17" fill="rgba(255, 255, 255, 0.06)" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1" />
+    <text x="90" y="22" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="13" font-weight="600" text-anchor="middle">⚡ V8 Edge Isolates</text>
+
+    <rect x="195" y="0" width="220" height="34" rx="17" fill="rgba(255, 255, 255, 0.06)" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1" />
+    <text x="305" y="22" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="13" font-weight="600" text-anchor="middle">💾 Automatic Checkpointing</text>
+
+    <rect x="430" y="0" width="210" height="34" rx="17" fill="rgba(255, 255, 255, 0.06)" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1" />
+    <text x="535" y="22" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="13" font-weight="600" text-anchor="middle">🛡️ Zero Infrastructure Ops</text>
+  </g>
+
+  <!-- Divider -->
+  <line x1="120" y1="435" x2="1080" y2="435" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1" />
+
+  <!-- Author and Meta -->
+  <text x="120" y="490" fill="#e2e8f0" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="600">BY SYNTEXIC EDGE ARCHITECTURE TEAM</text>
+  <text x="120" y="515" fill="#64748b" font-family="system-ui, -apple-system, sans-serif" font-size="13">AUGUST 2026 • 22 MIN READ • ARCHITECTURE BENCHMARK</text>
+
+  <!-- Brand logo mark -->
+  <text x="1080" y="505" fill="url(#primaryGlow)" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="800" text-anchor="end">SYNTEXIC.COM</text>
+</svg>

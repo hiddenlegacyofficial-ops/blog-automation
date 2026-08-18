@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" width="100%" height="100%">
+  <defs>
+    <linearGradient id="chartBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0f19" />
+      <stop offset="100%" stop-color="#030712" />
+    </linearGradient>
+    <linearGradient id="barCf" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f97316" />
+      <stop offset="100%" stop-color="#fb923c" />
+    </linearGradient>
+    <linearGradient id="barTempCloud" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#a78bfa" />
+    </linearGradient>
+    <linearGradient id="barTempSelf" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#60a5fa" />
+    </linearGradient>
+    <linearGradient id="barStepFunc" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#64748b" />
+      <stop offset="100%" stop-color="#94a3b8" />
+    </linearGradient>
+  </defs>
+
+  <!-- Container -->
+  <rect width="920" height="460" rx="20" fill="url(#chartBg)" stroke="rgba(255,255,255,0.12)" stroke-width="2" />
+
+  <!-- Header -->
+  <text x="45" y="48" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="700">Durable Execution Engines: Cold-Start Overhead &amp; Step Recovery Latency (2026)</text>
+  <text x="45" y="75" fill="#94a3b8" font-family="system-ui, -apple-system, sans-serif" font-size="13">Benchmarked over 100,000 multi-step agentic workflow executions with forced node termination</text>
+
+  <!-- Row 1: Cloudflare Workflows -->
+  <text x="45" y="132" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Cloudflare Workflows (Edge V8 Native)</text>
+  <rect x="430" y="112" width="65" height="28" rx="6" fill="url(#barCf)" />
+  <text x="505" y="131" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">4.2ms (Zero-Infra Edge)</text>
+
+  <!-- Row 2: Temporal Cloud -->
+  <text x="45" y="195" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Temporal Cloud (Managed Server + Workers)</text>
+  <rect x="430" y="175" width="180" height="28" rx="6" fill="url(#barTempCloud)" />
+  <text x="620" y="194" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">38.5ms P95</text>
+
+  <!-- Row 3: Temporal Self-Hosted -->
+  <text x="45" y="258" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Temporal Self-Hosted (Kubernetes + PostgreSQL)</text>
+  <rect x="430" y="238" width="240" height="28" rx="6" fill="url(#barTempSelf)" />
+  <text x="680" y="257" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">62.0ms P95 (High Ops Burden)</text>
+
+  <!-- Row 4: AWS Step Functions -->
+  <text x="45" y="321" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="14" font-weight="600">AWS Step Functions (Express + Lambda Invoke)</text>
+  <rect x="430" y="301" width="360" height="28" rx="6" fill="url(#barStepFunc)" />
+  <text x="800" y="320" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700">145.0ms P95</text>
+
+  <!-- Divider & Legend -->
+  <line x1="45" y1="375" x2="875" y2="375" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+
+  <g transform="translate(45, 405)">
+    <circle cx="10" cy="5" r="6" fill="#f97316" />
+    <text x="25" y="9" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">Cloudflare Workflows (Edge)</text>
+
+    <circle cx="230" cy="5" r="6" fill="#8b5cf6" />
+    <text x="245" y="9" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">Temporal Cloud</text>
+
+    <circle cx="390" cy="5" r="6" fill="#3b82f6" />
+    <text x="405" y="9" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">Temporal Self-Hosted</text>
+
+    <text x="830" y="9" fill="#64748b" font-family="system-ui, sans-serif" font-size="12" text-anchor="end">Source: Syntexic Edge Benchmark (August 2026)</text>
+  </g>
+</svg>
